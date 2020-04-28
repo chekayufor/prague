@@ -1,0 +1,121 @@
+import React from 'react';
+import {Link, NavLink} from 'react-router-dom';
+import {HashLink} from 'react-router-hash-link';
+import styled from 'styled-components'
+import DrawerToggleButton from './DrawerToggleButton';
+import Logo2 from '../style/Logo2';
+import SearchBar from '../SearchBar'
+
+
+const Toolbar = (props) => {
+    return (
+        <Bar className="toolbar">
+            <BarNavigation >
+            <Div><DrawerToggleButton click = {props.drawerToggleClickHandler}/></Div>
+            <BarLogo>
+                <a href="/"><Logo2/></a>
+            </BarLogo>
+            <Spacer />
+            <div style={{width:'200px'}}>
+                <SearchBar/>
+            </div>
+            <Spacer />
+            <BarItems>
+                <ul >
+                    <li><NavLink to='/'>Главная</NavLink></li>
+                    <li><NavLink to='/pragueTour' activeStyle={{
+                        fontWeight: "bold", color: "#79d9fd"}} >Прага</NavLink></li>
+                    <li><NavLink to='/czechTour' activeStyle={{
+                        fontWeight: "bold",
+                        color: "#79d9fd"
+                      }}>Чехия</NavLink></li>
+                    <li><NavLink to='/europeTour' activeStyle={{
+                        fontWeight: "bold",
+                        color: "#79d9fd"
+                      }}>Европа</NavLink></li>
+                    <li><NavLink to='/transfer' activeStyle={{
+                        fontWeight: "bold",
+                        color: "#79d9fd"
+                      }}>Трансфер</NavLink></li>
+                    <li><HashLink to='/#contacts' smooth>Контакты</HashLink></li>
+                </ul>
+            </BarItems>
+            </BarNavigation>
+        </Bar>
+    )
+}
+
+const Bar = styled.div`
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:100px;
+    background-color:rgba(0,0,0,0.5);
+    z-index:800;
+    @media(min-width: 600px) {
+  }
+`
+
+const BarNavigation = styled.div`
+    display:flex;
+    height:100%;
+    align-items:center;
+    padding: 0 1rem;
+`
+const BarLogo = styled.div`
+    margin-left: 5rem;
+
+ a {
+    color:rgba(0,0,0,1);
+    text-decoration:none;
+    font-family:American Typewriter, serif;
+     font-size:1.2rem;
+ }
+ @media(min-width: 600px) {
+    margin-left:0;
+    font-size:24px;
+  }
+`
+const BarItems = styled.div`
+    ul{
+        list-style:none;
+        margin:0;
+        padding:0;
+        display:flex;
+    }
+    li{
+        padding: 0 0.5rem;
+    }
+    a{
+        color:#fafafa;
+        /* color:rgba(0,0,0,1); */
+        text-decoration:none;
+        font-family:American Typewriter, serif;
+        /* filter: brightness(600%); */
+        /* text-transform:uppercase; */
+        filter: drop-shadow(2px 4px 6px black);
+        font-size:1.1rem;
+        &:hover, &:active {
+            color:#79d9fd;
+        }
+        @media(min-width: 600px) {
+            font-size:18px;
+        }
+        @media (min-width: 1480px) {
+            font-size:22px;
+        }
+    }
+    @media(max-width: 600px) {
+    display:none;
+  }
+`
+const Spacer = styled.div`
+    flex:1;
+`
+const Div = styled.div`
+@media(min-width: 600px) {
+   display:none;
+  }
+`
+export default Toolbar;
