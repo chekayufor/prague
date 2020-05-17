@@ -1,8 +1,8 @@
 import React, { Fragment, useContext, useEffect } from 'react';
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
-import ContactItem from './ContactItem';
-import Spinner from './layout/Spinner';
-import TourContext from '../context/tour/tourContext';
+import AuthTour from './AuthTour';
+import Spinner from '../layout/Spinner';
+import TourContext from '../../context/tour/tourContext';
 
 const AuthTours = () => {
   const tourContext = useContext(TourContext);
@@ -29,7 +29,7 @@ const AuthTours = () => {
                   timeout={500}
                   classNames='item'
                 >
-                  <TourItem tour={tour} />
+                  <AuthTour tour={tour} />
                 </CSSTransition>
               ))
             : tours.map(tour => (
@@ -38,7 +38,7 @@ const AuthTours = () => {
                   timeout={500}
                   classNames='item'
                 >
-                  <TourItem tour={tour} />
+                  <AuthTour tour={tour} />
                 </CSSTransition>
               ))}
         </TransitionGroup>

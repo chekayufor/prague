@@ -90,8 +90,5 @@ const Image = styled.img`
         height:835px;
     }
 `;
-const A = styled.a`
-  cursor: pointer;
-`
 
 export default CarouselReactSlickFade;

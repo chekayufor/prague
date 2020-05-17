@@ -6,11 +6,11 @@ const Bottom = () => {
         <BottomContainer  id='contacts'>
             <Sociall>
                 <ul>
-                    <li><a href="https://www.facebook.com/prahaguide/?ref=bookmarks" target="_blank" rel="facebook"><img src='/images/icons/facebook.png'/></a></li>
+                    <li><a href="https://www.facebook.com/prahaguide/?ref=bookmarks" target="_blank" rel="noopener noreferrer"><img alt='facebook' src='/images/icons/facebook.png'/></a></li>
                     <li><a href="https://www.instagram.com/guide_praha_dmitry/
-                    " target="_blank" rel="instagram"><img src='/images/icons/instagram.png'/></a></li>
-                    <li><a href="https://vk.com/id469089698" target="_blank" rel="vk"><img src='/images/icons/vk.png'/></a></li>
-                    <li><a href="mailto:dmitriy.prague@gmail.com?subject= Запрос с сайта о путешествиях по Праге&amp;body= Будем рады ответить на любой Ваш вопрос 🙂&amp" target="_blank" rel="email"><i className="material-icons " style={{color:'#ffffff', fontSize: '28px'}}>email</i></a></li>
+                    " target="_blank" rel="noopener noreferrer"><img alt='instagram' src='/images/icons/instagram.png'/></a></li>
+                    <li><a href="https://vk.com/id469089698" target="_blank" rel="noopener noreferrer"><img alt='vk' src='/images/icons/vk.png'/></a></li>
+                    <li><a href="mailto:dmitriy.prague@gmail.com?subject= Запрос с сайта о путешествиях по Праге&amp;body= Будем рады ответить на любой Ваш вопрос 🙂&amp" target="_blank" rel="noopener noreferrer"><i className="material-icons " style={{color:'#ffffff', fontSize: '28px'}}>email</i></a></li>
                 </ul>
             </Sociall>
             <Contacts>
@@ -19,7 +19,7 @@ const Bottom = () => {
                  dmitriy.prague@gmail.com
                 </a>
                 </Email>
-                <Auth><a href='https://elena-dubinsky.netlify.com/' target="_blank" rel="auth">@made by Elena Dubinsky</a></Auth>
+                <Auth><a href='https://elena-dubinsky.netlify.com/' target="_blank" rel="noopener noreferrer">@made by Elena Dubinsky</a></Auth>
             </Contacts>
         </BottomContainer>
     )

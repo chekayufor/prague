@@ -40,6 +40,7 @@ const TourState = props => {
       dispatch({
         type: TOUR_ERROR,
         payload: err.response.msg
+        // payload: 'err.response.msg'
       });
     }
   };
@@ -53,7 +54,7 @@ const TourState = props => {
     };
 
     try {
-      const res = await axios.post('/api/tours', tour, config);
+      const res = await axios.post('/api/excursion', tour, config);
 
       dispatch({
         type: ADD_TOUR,
@@ -70,7 +71,7 @@ const TourState = props => {
   // Delete Tour
   const deleteTour = async id => {
     try {
-      await axios.delete(`/api/tours/${id}`);
+      await axios.delete(`/api/excursion/${id}`);
 
       dispatch({
         type: DELETE_TOUR,
@@ -94,7 +95,7 @@ const TourState = props => {
 
     try {
       const res = await axios.put(
-        `/api/tours/${tour._id}`,
+        `/api/excursion/${tour._id}`,
         tour,
         config
       );

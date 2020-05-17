@@ -1,22 +1,33 @@
-import React from 'react';
+import React, {useContext, useEffect} from 'react';
+import TourContext from '../../context/tour/tourContext';
 import styled from 'styled-components';
 import H2 from '../layout/style/H2Text';
-import Tours from '../Tours'
+import Tours from '../tours/Tours'
 
 const СzechTour = () => {
-   
-    const tours=[
-        {id:1,name:'name', section:'section',text:'textvhdjjjjjhjhdjhjdhdjhjhjfhjdhksdkhkdhjkhdkhdkhdkkhkdhkdh', img:'/images/guests/IMG_20190111_124316.jpg',cost:'cost',quantity:'quantity',duration:'duration',included:'included',unincluded:'unincluded',necessary:'necessary',location:'location',language:'language',contentType:'contentType',
-        date:'date'},{id:2,name:'name', section:'section',text:'text', img:'/images/guests/IMG_20190111_124316.jpg',cost:'cost',quantity:'quantity',duration:'duration',included:'included',unincluded:'unincluded',necessary:'necessary',location:'location',language:'language',contentType:'contentType',
-        date:'date'},{id:3,name:'name', section:'section',text:'text', img:'/images/guests/IMG_20190111_124316.jpg',cost:'cost',quantity:'quantity',duration:'duration',included:'included',unincluded:'unincluded',necessary:'necessary',location:'location',language:'language',contentType:'contentType',
-        date:'date'},{id:4,name:'name', section:'section',text:'text', img:'/images/guests/IMG_20190111_124316.jpg',cost:'cost',quantity:'quantity',duration:'duration',included:'included',unincluded:'unincluded',necessary:'necessary',location:'location',language:'language',contentType:'contentType',
-        date:'date'}
-    ];
+    const tourContext=useContext(TourContext);
+    const {tours, getTours} = tourContext;
+    
+    useEffect(()=>{
+        getTours(); 
+        //eslint-disable-next-line
+    },[])
 
+const getPageTours = () => {
+    let arr = [];
+    if(tours !== null) {
+         arr = tours.filter(tour => 
+            tour.type.toString() === 'europe'
+        )
+        console.log({arr})
+    }
+    // return setPragueTours(arr);
+    return arr;
+}
     return (
         <Container>
-           <H2 style={{marginTop:'100px'}}>ЭКСКУРСИИ ПО ЕВРОПЕ</H2>
-           <Tours tours={tours}/>
+           <H2 style={{marginTop:'100px'}}>ЭКСКУРСИИ ПО ЧЕХИИ</H2>
+           <Tours tours={getPageTours()}/>
         </Container>
     )
 }

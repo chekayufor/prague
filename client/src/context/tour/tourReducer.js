@@ -70,7 +70,7 @@ import {
           ...state,
           filtered: state.tours.filter(tour => {
             const regex = new RegExp(`${action.payload}`, 'gi');
-            return tour.name.match(regex) || tour.email.match(regex);
+            return tour.name.match(regex) || tour.section.match(regex) || tour.text.match(regex);
           })
         };
       case CLEAR_FILTER:

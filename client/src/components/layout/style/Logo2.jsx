@@ -1,13 +1,17 @@
 import React from 'react';
 import styled, {keyframes} from 'styled-components'
+import {Link} from 'react-router-dom';
+
 
 const Logo2 = () => {
     return (
-        <NeonWrapper>
-            <Txt>Prague</Txt>
-            <Gradient/>
-            <Dodge/>
-        </NeonWrapper>
+        <Link to='login'>
+            <NeonWrapper>
+                <Txt>Prague</Txt>
+                <Gradient/>
+                <Dodge/>
+            </NeonWrapper>
+        </Link>
     )
 }
 const NeonWrapper = styled.div`

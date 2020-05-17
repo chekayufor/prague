@@ -1,14 +1,27 @@
-import React, { useRef } from 'react';
+import React, { useContext, useRef, useEffect } from 'react';
+import TourContext from '../../context/tour/tourContext';
 import styled from 'styled-components';
 
 
 const SearchBar = () => {
-    const text = useRef('');
+    const tourContext = useContext(TourContext);
+  const text = useRef('');
 
-    //   const onChange = e => {
-    //     searchLogs(text.current.value);
-    //   };
+  const { filterTours, clearFilter, filtered } = tourContext;
 
+  useEffect(() => {
+    if (filtered === null) {
+      text.current.value = '';
+    }
+  });
+
+  const onChange = e => {
+    if (text.current.value !== '') {
+      filterTours(e.target.value);
+    } else {
+      clearFilter();
+    }
+  };
     return (
                     <ContainerInput >
                         <input
@@ -17,7 +30,7 @@ const SearchBar = () => {
                             placeholder="🔎 поиск экскурсии..."
                             style={{borderBottom:'1px ,solid #ffffff', borderRadius: '5px', backgroundColor: '#ffffff',margin:'0',height:'100%' }}
                             ref={text}
-                            onChange={e => console.log(e.target.value)}
+                            onChange={onChange}
                         />
                     </ContainerInput>
     );

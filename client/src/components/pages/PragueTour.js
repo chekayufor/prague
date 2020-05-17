@@ -1,20 +1,37 @@
-import React from 'react';
+import React, {useContext, Fragment, useState, useEffect} from 'react';
+import TourContext from '../../context/tour/tourContext';
+
 import styled from 'styled-components';
 import H2 from '../layout/style/H2Text';
-import Tours from '../Tours'
+import Tours from '../tours/Tours'
 const PragueTour = () => {
-    const tours=[
-        {id:1,name:'name', section:'section',text:'textvhdjjjjjhjhdjhjdhdjhjhjfhjdhksdkhkdhjkhdkhdkhdkkhkdhkdh', img:'/images/guests/IMG_20190111_124316.jpg',cost:'cost',quantity:'quantity',duration:'duration',included:'included',unincluded:'unincluded',necessary:'necessary',location:'location',language:'language',contentType:'contentType',
-        date:'date'},{id:2,name:'name', section:'section',text:'text', img:'/images/guests/IMG_20190111_124316.jpg',cost:'cost',quantity:'quantity',duration:'duration',included:'included',unincluded:'unincluded',necessary:'necessary',location:'location',language:'language',contentType:'contentType',
-        date:'date'},{id:3,name:'name', section:'section',text:'text', img:'/images/guests/IMG_20190111_124316.jpg',cost:'cost',quantity:'quantity',duration:'duration',included:'included',unincluded:'unincluded',necessary:'necessary',location:'location',language:'language',contentType:'contentType',
-        date:'date'},{id:4,name:'name', section:'section',text:'text', img:'/images/guests/IMG_20190111_124316.jpg',cost:'cost',quantity:'quantity',duration:'duration',included:'included',unincluded:'unincluded',necessary:'necessary',location:'location',language:'language',contentType:'contentType',
-        date:'date'}
-    ];
 
+    const tourContext=useContext(TourContext);
+    const {tours, getTours} = tourContext;
+    // const [pragueTours, setPragueTours] = useState([]);
+
+    useEffect(()=>{
+        getTours(); 
+        //eslint-disable-next-line
+    },[])
+
+const getPageTours = () => {
+    let arr = [];
+    if(tours !== null) {
+         arr = tours.filter(tour => 
+            tour.type.toString() === 'prague'
+        )
+        console.log({arr})
+    }
+    // return setPragueTours(arr);
+    return arr;
+}
+
+// console.log({pragueTours})
     return (
         <Container>
-           <H2 style={{marginTop:'100px'}}>ЭКСКУРСИИ ПО ЕВРОПЕ</H2>
-           <Tours tours={tours}/>
+           <H2 style={{marginTop:'100px'}}>ЭКСКУРСИИ ПО ПРАГЕ</H2>
+         <Tours tours={getPageTours()}/>
         </Container>
     )
 }

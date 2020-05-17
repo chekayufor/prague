@@ -3,21 +3,31 @@ import TourContext from '../../context/tour/tourContext';
 
 import styled from 'styled-components';
 import H2 from '../layout/style/H2Text';
-import Tours from '../Tours'
+import Tours from '../tours/Tours'
 const EuropeTour = () => {
     const tourContext=useContext(TourContext);
     const {tours, getTours} = tourContext;
-
+    
     useEffect(()=>{
-        getTours();
+        getTours(); 
         //eslint-disable-next-line
-    }, []);
+    },[])
 
-  
+const getPageTours = () => {
+    let arr = [];
+    if(tours !== null) {
+         arr = tours.filter(tour => 
+            tour.type.toString() === 'europe'
+        )
+        console.log({arr})
+    }
+    // return setPragueTours(arr);
+    return arr;
+}
     return (
         <Container>
            <H2 style={{marginTop:'100px'}}>ЭКСКУРСИИ ПО ЕВРОПЕ</H2>
-           <Tours tours={tours}/>
+           <Tours tours={getPageTours()}/>
         </Container>
     )
 }
@@ -40,6 +50,3 @@ const Container = styled.div`
     `
     
 export default EuropeTour;
-
-// props={id, name, section,text, img, cost,quantity,duration,included,unincluded,necessary,location,language,contentType,
-//     date}

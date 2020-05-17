@@ -1,47 +1,72 @@
-import React, {useContext, useEffect} from 'react';
+import React, { useContext, useEffect, Fragment } from 'react';
 import {Link} from 'react-router-dom';
 import TourContext from '../../context/tour/tourContext';
-
+import { CSSTransition, TransitionGroup } from 'react-transition-group';
+import Spinner from '../layout/Spinner';
 import styled from 'styled-components';
+import Tours from '../tours/Tours';
 import MainHeader from '../layout/MainHeader';
 import Footer from '../layout/footer/Footer';
-// import GuestGallery from '../layout/GuestGallery';
-// import Sociall from '../layout/Sociall';
 import H2 from '../layout/style/H2Text'
 const MainContainer = () => {
+    const tourContext = useContext(TourContext);
 
-    // const tourContext=useContext(TourContext);
-    // const {getTours, tours} = tourContext;
+    const { tours, filtered, getTours, loading } = tourContext;
 
-    // useEffect(()=>{
-    //     getTours();
-    //     //eslint-disable-next-line
-    // }, []);
+    useEffect(() => {
+        getTours();
+        // eslint-disable-next-line
+      }, []);
 
     return (
+        
         <Container >
-          <MainHeader/>
-          <ContentContainer>
-                <Section>
-                    <Link to='/pragueTour' ><H2>Экскурсии по Праге</H2></Link>
-                    <ImageContainer><Img src="/images/pragueTram.jpg" alt="prague"/></ImageContainer>
-                </Section>
-                <Section>
-                    <Link to='/czechTour'><H2>Экскурсии по Чехии</H2></Link>
-                    <ImageContainer><Img src="/images/czech-krumlov.jpg" alt="czech"/></ImageContainer>
-                </Section>
-                <Section>
-                    <Link to='/europeTour'><H2>Экскурсии по Европе</H2></Link>
-                    <ImageContainer><Img src="/images/veinAndTransfer/belvedere-1601372.jpg" alt="europe"/></ImageContainer>
-                </Section>
-                <Section>
-                    <Link to='/transfer'><H2>Трансфер</H2></Link>
-                    <ImageContainer><Img src="/images/veinAndTransfer/mercedes-maybach-s-class-4k-2018-cars-w222-road.jpg" alt="transfer"/></ImageContainer>
-                </Section>
-            </ContentContainer>
+         
+          {tours !== null && !loading ? 
+            ( 
+                <TransitionGroup>
+                    {filtered !== null
+                        ? (
+                            <Fragment>
+                            {filtered.map(tour => (
+                            <CSSTransition
+                                key={tour._id}
+                                timeout={500}
+                                classNames='item'
+                            >
+                                <Tours tour={tour} />
+                            </CSSTransition>
+                        ))}
+                        </Fragment>
+                        ):
+                    ( <Fragment>
+                        <MainHeader/>
+                        <ContentContainer>
+                            <Section>
+                                <Link to='/pragueTour' ><H2>Экскурсии по Праге</H2></Link>
+                                <ImageContainer><Img src="/images/pragueTram.jpg" alt="prague"/></ImageContainer>
+                            </Section>
+                            <Section>
+                                <Link to='/czechTour'><H2>Экскурсии по Чехии</H2></Link>
+                                <ImageContainer><Img src="/images/czech-krumlov.jpg" alt="czech"/></ImageContainer>
+                            </Section>
+                            <Section>
+                                <Link to='/europeTour'><H2>Экскурсии по Европе</H2></Link>
+                                <ImageContainer><Img src="/images/veinAndTransfer/belvedere-1601372.jpg" alt="europe"/></ImageContainer>
+                            </Section>
+                            <Section>
+                                <Link to='/transfer'><H2>Трансфер</H2></Link>
+                                <ImageContainer><Img src="/images/veinAndTransfer/mercedes-maybach-s-class-4k-2018-cars-w222-road.jpg" alt="transfer"/></ImageContainer>
+                            </Section>
+                        </ContentContainer>
+                    </Fragment>
+                    )}
+                </TransitionGroup>
+                         ) : (
+                <Spinner />
+              )}
             <Footer/>
         </Container>
-
     )
 }
 

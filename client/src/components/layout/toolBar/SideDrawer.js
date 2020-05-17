@@ -1,10 +1,38 @@
-import React from 'react'
+import React, {useContext, Fragment} from 'react'
 import {Link} from 'react-router-dom';
-import {HashLink} from 'react-router-hash-link';
 import styled from 'styled-components';
-import SearchBar from '../SearchBar'
+import SearchBar from '../SearchBar';
+
+import AuthContext from '../../../context/auth/authContext';
+
 
 const SideDrawer = (props) => {
+  const authContext = useContext(AuthContext);
+  const {  isAuthenticated, logout, token } = authContext;
+
+  const onLogOut=()=>{
+      logout();
+  }
+  const authLinks=(
+    <Fragment>
+            <li><Link to='/'>Главная</Link></li>
+            <li><Link to='/privet'>Админка</Link></li>
+            <a  onClick={onLogOut} href='#!'>
+            <i className="small material-icons exit_to_app">exit_to_app</i>
+            </a>
+    </Fragment>
+  )
+
+  const gestLinks = (
+    <Fragment>
+      <li><Link to='/'>Главная</Link></li>
+      <li><Link to='/pragueTour' >Экскурсии по Праге</Link></li>
+      <li><Link to='/czechTour'>Экскурсии по Чехии</Link></li>
+      <li><Link to='/europeTour'>Экскурсии по Европе</Link></li>
+      <li><Link to='/transfer'>Трансфер</Link></li>
+      <li><a href='/#about'>Обо мне</a></li>
+    </Fragment>
+  )
     return (
       <SideDrawerContainer show={props.show}>
         <div>
@@ -17,12 +45,9 @@ const SideDrawer = (props) => {
         </div>
         <SearchBar/>
         <ul onClick={props.backdropClickHandler}>
-            <li><Link to='/'>Главная</Link></li>
-            <li><Link to='/pragueTour' >Экскурсии по Праге</Link></li>
-            <li><Link to='/czechTour'>Экскурсии по Чехии</Link></li>
-            <li><Link to='/europeTour'>Экскурсии по Европе</Link></li>
-            <li><Link to='/transfer'>Трансфер</Link></li>
-            <li><a href='/#about'>Обо мне</a></li>
+          {
+          (!isAuthenticated && !token)?(gestLinks):(authLinks)
+          }
         </ul>
       </SideDrawerContainer>
     )

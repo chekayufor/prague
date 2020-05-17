@@ -20,8 +20,17 @@ const ExcursionSchema = mongoose.Schema({
         data: Buffer,
         contentType: [String]
     },
-    cost: {
-        type: [String]
+    cost1: {
+        type: String
+    },
+    cost2: {
+        type: String
+    },
+    cost3: {
+        type: String
+    },
+    cost4: {
+        type: String
     },
     start: {
         type: String
@@ -42,7 +51,7 @@ const ExcursionSchema = mongoose.Schema({
         type: String
     },
     language: {
-        type: [String]
+        type: String
     },
     type: {
         type: String,

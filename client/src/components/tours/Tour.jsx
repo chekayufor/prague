@@ -1,10 +1,11 @@
-import React, {useState, useEffect, useContext, Fragment} from 'react';
+import React, {useEffect, useContext, Fragment} from 'react';
 import styled from 'styled-components';
-import TourContext from '../context/tour/tourContext';
-import Spinner from './layout/Spinner';
+import TourContext from '../../context/tour/tourContext';
+import Spinner from '../layout/Spinner';
+import Emoji from '../layout/Emoji'
 
-import {useParams} from 'react-router-dom';
-import CarouselReactSlickFade from './layout/carousel/CarouselReactSlickFade';
+// import {useParams} from 'react-router-dom';
+import CarouselReactSlickFade from '../layout/carousel/CarouselReactSlickFade';
 import { withRouter } from 'react-router-dom';//navigation for goBack 
 
 const Tour = (props) => {
@@ -18,9 +19,13 @@ const Tour = (props) => {
         //eslint-disable-next-line
     }, [props.location.tourProps]);
 
-    const isPageRefreshed=()=> {
-        return window.performance && performance.navigation.type === 1;
-      }
+    // const isPageRefreshed=()=> {
+    //     return window.performance && performance.navigation.type === 1;
+    //   }
+    
+    const Formatter = (text) => {
+         text.replace('//n', <br/>)
+    }
 
     return (
         <Container>
@@ -28,7 +33,7 @@ const Tour = (props) => {
             <Fragment>
             <H3>{tour.name}</H3>
             <Div>
-                <Button onClick={props.history.goBack}>⬅️ Назад</Button>
+                <Button onClick={props.history.goBack}><Emoji symbol='⬅️' label='button'/>Назад </Button>
             </Div>
             <Content>
                 <CarouselReactSlickFade pic={tour.img}/>
@@ -78,7 +83,7 @@ const Tour = (props) => {
         text-align: center;
         padding: 10px;
         @media (min-width: 1024px) {
-            width: 780px;
+            width: 980px;
         }
         @media (min-width: 1400px) {
             width: 1200px;
@@ -112,9 +117,9 @@ const Tour = (props) => {
         align-items: center;
         text-align: start;
         padding: 20px 40px;
-        font-size: 1.4rem;
+        font-size: 1.2rem;
         @media (min-width: 1024px) {
-            font-size: 1.6rem;
+            font-size: 1.4rem;
         }
         @media (min-width: 1400px) {
             font-size: 2rem;

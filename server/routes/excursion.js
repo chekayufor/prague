@@ -41,20 +41,24 @@ router.post(
         ]
     ],
     async (req, res) => {
+        // res.send('Add tour');
         const errors = validationResult(req);
         if (!errors.isEmpty()) {
             return res.status(400).json({ errors: errors.array() });
         }
 
-        const { name, section, text, img, cost, start, duration, included, unincluded, necessary, location, language, type } = req.body;
+        const { name, section, text, img: pic, cost1,cost2,cost3,cost4, start, duration, included, unincluded, necessary, location, language, type } = req.body;
 
         try {
             const newExcursion = new Excursion({
                 name,
                 section,
                 text,
-                img,
-                cost,
+                img:[...pic],
+                cost1,
+                cost2,
+                cost3,
+                cost4,
                 start,
                 duration,
                 included,
@@ -80,7 +84,7 @@ router.post(
 // @desc      Update excursion
 // @access    Private
 router.put('/:id', auth, async (req, res) => {
-    const { name, section, text, img, cost, quantity, duration, included, unincluded, necessary, location, language, type } = req.body;
+    const {  name, section, text, img, cost1,cost2,cost3,cost4, start, duration, included, unincluded, necessary, location, language, type } = req.body;
 
     // Build excursion object
     const excursionFields = {};
@@ -88,7 +92,10 @@ router.put('/:id', auth, async (req, res) => {
     if (section) excursionFields.section = section;
     if (text) excursionFields.text = text;
     if (img) excursionFields.img = img;
-    if (cost) excursionFields.cost = cost;
+    if (cost1) excursionFields.cost1 = cost1;
+    if (cost2) excursionFields.cost2 = cost2;
+    if (cost3) excursionFields.cost2 = cost3;
+    if (cost4) excursionFields.cost4 = cost4;
     if (start) excursionFields.start = start;
     if (duration) excursionFields.duration = duration;
     if (included) excursionFields.included = included;

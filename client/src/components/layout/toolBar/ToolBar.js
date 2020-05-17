@@ -1,44 +1,72 @@
-import React from 'react';
-import {Link, NavLink} from 'react-router-dom';
+import React, {useContext, Fragment} from 'react';
+import {NavLink} from 'react-router-dom';
 import {HashLink} from 'react-router-hash-link';
 import styled from 'styled-components'
 import DrawerToggleButton from './DrawerToggleButton';
 import Logo2 from '../style/Logo2';
-import SearchBar from '../SearchBar'
+import SearchBar from '../SearchBar';
+
+import AuthContext from '../../../context/auth/authContext';
 
 
 const Toolbar = (props) => {
+
+    const authContext = useContext(AuthContext);
+    const {  isAuthenticated, logout, token } = authContext;
+
+    const onLogOut=()=>{
+        logout();
+    }
+
+    const authLinks=(
+        <Fragment>
+            <ul>
+                <li><NavLink to='/'>Главная</NavLink></li>
+                <li><NavLink to='/privet'>Админка</NavLink></li>
+                <a  onClick={onLogOut} href='#!'>
+                <i className="small material-icons exit_to_app">exit_to_app</i>
+                </a>
+            </ul>
+        </Fragment>
+    )
+    const gestLinks = (
+        <Fragment>
+            <ul >
+                <li><NavLink to='/'>Главная</NavLink></li>
+                <li><NavLink to='/pragueTour' activeStyle={{
+                    fontWeight: "bold", color: "#79d9fd"}} >Прага</NavLink></li>
+                <li><NavLink to='/czechTour' activeStyle={{
+                    fontWeight: "bold",
+                    color: "#79d9fd"
+                }}>Чехия</NavLink></li>
+                <li><NavLink to='/europeTour' activeStyle={{
+                    fontWeight: "bold",
+                    color: "#79d9fd"
+                }}>Европа</NavLink></li>
+                <li><NavLink to='/transfer' activeStyle={{
+                    fontWeight: "bold",
+                    color: "#79d9fd"
+                }}>Трансфер</NavLink></li>
+                <li><HashLink to='/#contacts' smooth>Контакты</HashLink></li>
+             </ul>
+        </Fragment>
+    )
     return (
         <Bar className="toolbar">
             <BarNavigation >
             <Div><DrawerToggleButton click = {props.drawerToggleClickHandler}/></Div>
             <BarLogo>
-                <a href="/"><Logo2/></a>
+                <Logo2/>
             </BarLogo>
             <Spacer />
             <div style={{width:'200px'}}>
                 <SearchBar/>
             </div>
             <Spacer />
-            <BarItems>
-                <ul >
-                    <li><NavLink to='/'>Главная</NavLink></li>
-                    <li><NavLink to='/pragueTour' activeStyle={{
-                        fontWeight: "bold", color: "#79d9fd"}} >Прага</NavLink></li>
-                    <li><NavLink to='/czechTour' activeStyle={{
-                        fontWeight: "bold",
-                        color: "#79d9fd"
-                      }}>Чехия</NavLink></li>
-                    <li><NavLink to='/europeTour' activeStyle={{
-                        fontWeight: "bold",
-                        color: "#79d9fd"
-                      }}>Европа</NavLink></li>
-                    <li><NavLink to='/transfer' activeStyle={{
-                        fontWeight: "bold",
-                        color: "#79d9fd"
-                      }}>Трансфер</NavLink></li>
-                    <li><HashLink to='/#contacts' smooth>Контакты</HashLink></li>
-                </ul>
+            <BarItems>{
+                (!isAuthenticated && !token)?(gestLinks):(authLinks)
+                }
+               
             </BarItems>
             </BarNavigation>
         </Bar>
