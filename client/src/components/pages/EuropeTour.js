@@ -4,7 +4,7 @@ import TourContext from '../../context/tour/tourContext';
 import styled from 'styled-components';
 import H2 from '../layout/style/H2Text';
 import Tours from '../tours/Tours'
-const EuropeTour = () => {
+const EuropeTour = (props) => {
     const tourContext=useContext(TourContext);
     const {tours, getTours} = tourContext;
     
@@ -19,7 +19,7 @@ const getPageTours = () => {
          arr = tours.filter(tour => 
             tour.type.toString() === 'europe'
         )
-        console.log({arr})
+        // console.log({arr})
     }
     // return setPragueTours(arr);
     return arr;

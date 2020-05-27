@@ -19,3 +19,7 @@ export const LOGIN_FAIL = 'LOGIN_FAIL';
 export const LOGOUT = 'LOGOUT';
 export const CLEAR_ERRORS = 'CLEAR_ERRORS';
 export const SET_TOUR = 'SET_TOUR';
+export const PICTURE_ERROR = 'PICTURE_ERROR';
+export const ADD_PICTURE = 'ADD_PICTURE';
+export const DELETE_PICTURE = 'DELETE_PICTURE';
+export const GET_PICTURE = 'GET_PICTURE';

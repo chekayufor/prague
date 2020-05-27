@@ -13,12 +13,19 @@ import {
   CLEAR_TOURS,
   CLEAR_FILTER,
   TOUR_ERROR,
-  SET_TOUR
+  SET_TOUR,
+  PICTURE_ERROR,
+  ADD_PICTURE,
+  DELETE_PICTURE,
+  GET_PICTURE
+
 } from '../types';
 
 const TourState = props => {
   const initialState = {
     tours: null,
+    pictures:null,
+    picture:null,
     current: null,
     tour: null,
     filtered: null,
@@ -94,6 +101,7 @@ const TourState = props => {
     };
 
     try {
+      debugger;
       const res = await axios.put(
         `/api/excursion/${tour._id}`,
         tour,
@@ -140,11 +148,70 @@ const TourState = props => {
     dispatch({ type: CLEAR_FILTER });
   };
 
-  
+   // Get Pictures
+   const getPictures = async () => {
+    try {
+      const res = await axios.get('/upload');
+
+      dispatch({
+        type: GET_PICTURE,
+        payload: res.data
+      });
+    } catch (err) {
+      dispatch({
+        type: PICTURE_ERROR,
+        payload: err.response.msg
+        // payload: 'err.response.msg'
+      });
+    }
+  };
+
+  // Add Pictures
+  const addPicture = async picture => {
+    const formData = new FormData();
+    formData.append('myImage', picture)
+    const config = {
+      headers: {
+        'Content-Type': 'multipart/form-data'
+      }
+    };
+    try {
+      const res = await axios.post('/upload', formData, config);
+      dispatch({
+        type: ADD_PICTURE,
+        payload: res.data
+      });
+    } catch (err) {
+      dispatch({
+        type: PICTURE_ERROR,
+        payload: err.response.msg
+      });
+    }
+  };
+
+  // Delete Pictures
+  const deletePicture = async id => {
+    try {
+      await axios.delete(`/upload/${id}`);
+
+      dispatch({
+        type: DELETE_PICTURE,
+        payload: id
+      });
+    } catch (err) {
+      dispatch({
+        type: PICTURE_ERROR,
+        payload: err.response.msg
+      });
+    }
+  };
+
   return (
     <TourContext.Provider
       value={{
         tours: state.tours,
+        pictures: state.pictures,
+        picture: state.picture,
         current: state.current,
         tour: state.tour,
         filtered: state.filtered,
@@ -158,7 +225,10 @@ const TourState = props => {
         clearFilter,
         getTours,
         clearTours,
-        setTour
+        setTour,
+        getPictures,
+        addPicture,
+        deletePicture
       }}
     >
       {props.children}

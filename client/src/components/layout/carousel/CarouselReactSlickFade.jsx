@@ -33,8 +33,8 @@ const CarouselReactSlickFade = () => {
     return (
         <SlideContainer>
             <Slider className='fade' {...settings}>
-            {imgList.map(({ id, img, name, linkCode })=>(
-                <Slide key={id}>
+            {imgList.map(({ id, img, name, linkCode },index)=>(
+                <Slide data-index={index} key={id}>
                     <Image src={img} alt={name} />
                 </Slide>           
             ))} 
@@ -56,13 +56,13 @@ const SlideContainer = styled.div`
         height: 460px;
     }
     @media (min-width: 1400px) {
-            width: 1200px;
-            height:660px
+            width: 1000px;
+            height:500px
     }
-    @media (min-width: 1800px) {
+    /* @media (min-width: 1800px) {
         width: 1600px;
         height:840px;
-    }
+    } */
 `;
 const Slide = styled.div`
   height: 100%;
@@ -84,11 +84,11 @@ const Image = styled.img`
         height: 455px;
     }
     @media (min-width: 1400px) {
-            height:655px
+            height:545px
     }
-    @media (min-width: 1800px) {
+    /* @media (min-width: 1800px) {
         height:835px;
-    }
+    } */
 `;
 
 export default CarouselReactSlickFade;

@@ -1,22 +1,25 @@
 import React, { useState, useContext, useEffect } from 'react';
-import AlertContext from '../../context/alert/alertContext';
+// import AlertContext from '../../context/alert/alertContext';
 import AuthContext from '../../context/auth/authContext';
-
+import 'materialize-css/dist/css/materialize.min.css';
+import M from 'materialize-css/dist/js/materialize.min.js';
 const Register = props => {
-  const alertContext = useContext(AlertContext);
+  // const alertContext = useContext(AlertContext);
   const authContext = useContext(AuthContext);
 
-  const { setAlert } = alertContext;
+  // const { setAlert } = alertContext;
   const { register, error, clearErrors, isAuthenticated } = authContext;
 
   useEffect(() => {
+    M.AutoInit();
       //redirection
     if (isAuthenticated) {
       props.history.push('/privet');
     }
 
     if (error === 'User already exists') {
-      setAlert(error, 'danger');
+      // setAlert(error, 'danger');
+      M.toast({html:`${error}`})
       clearErrors();
     }
     // eslint-disable-next-line
@@ -36,9 +39,11 @@ const Register = props => {
   const onSubmit = e => {
     e.preventDefault();
     if (name === '' || email === '' || password === '') {
-      setAlert('Please enter all fields', 'danger');
+      // setAlert('Please enter all fields', 'danger');
+      M.toast({html:'Пожалуйста заполните все поля'})
     } else if (password !== password2) {
-      setAlert('Passwords do not match', 'danger');
+      // setAlert('Passwords do not match', 'danger');
+      M.toast({html:'Пароли не эдентичные'})
     } else {
       register({
         name,

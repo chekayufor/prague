@@ -1,6 +1,9 @@
 const express = require('express');
-var multer = require('multer');
+require ('dotenv').config();
+const moment = require('moment')
+// var multer = require('multer');
 const connectDB = require('./config/db');
+const nodemailer = require('nodemailer');
 
 //start express
 const app = express();
@@ -17,6 +20,69 @@ app.get('/', (rec, res) => res.json({ msg: 'Welcome to Prague' }));
 app.use('/api/users', require('./routes/users'));
 app.use('/api/auth', require('./routes/auth'));
 app.use('/api/excursion', require('./routes/excursion'));
+// app.use('/api/send', require('./routes/send'));
+//data parsing
+app.use(express.urlencoded({extended:false}));
+app.use(express.json());
+
+
+//sending email
+app.post('/api/send', (req, res) => {
+    const {name, tel, email, data, text} = req.body;
+
+    const output = `
+            <p>You have a new contact request from PragueTour</p>
+            <h3>Contact Details</h3>
+            <ul>  
+            <li>Name: ${name}</li>
+            <li>Phone: ${tel}</li>
+            <li>Email: ${email}</li>
+            <li>Date: ${moment(data).format("LL dddd")}</li>
+            <li>Text: ${text}</li>
+            </ul>
+        `
+    // create reusable transporter object using the default SMTP transport
+    let transporter = nodemailer.createTransport({
+        host: 'gmail',
+        port: 587,
+        service:'gmail',
+        secure: false, // true for 465, false for other ports
+        auth: {
+          user:process.env.EMAIL , // generated ethereal user
+          pass: process.env.PASSWORD  // generated ethereal password
+        },
+        //localhost
+      tls:{
+        rejectUnauthorized:false
+      }
+    });
+    // setup email data with unicode symbols
+    let mailOptions = {
+        from: 'dmitriy.prague@gmail.com', // sender address
+        to: 'dmitriy.prague@gmail.com', // list of receivers
+        subject: 'Node Contact Request', // Subject line
+        text: 'Hello world?', // plain text body
+        html: output // html body
+    }; 
+    // send mail with defined transport object
+    transporter.sendMail(mailOptions, (error, info) => {
+
+        if (error) {
+            console.log(error);
+        }else{
+            // console.log('Message sent: %s', info.messageId);   
+            console.log('_____________Message sent____________');   
+        }
+  
+        });
+    console.log('DATA', req.body);
+    res.json({message: 'Message received!'})
+});
+
+
+app.get('/',(res, req)=>{
+    console.log('app.get', res)
+})
 
 const PORT = process.env.PORT || 5000;
 

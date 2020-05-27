@@ -9,7 +9,11 @@ import {
     CLEAR_FILTER,
     TOUR_ERROR,
     CLEAR_TOURS,
-    SET_TOUR
+    SET_TOUR,
+    GET_PICTURE,
+    ADD_PICTURE,
+    PICTURE_ERROR,
+    DELETE_PICTURE
   } from '../types';
   
   export default (state, action) => {
@@ -20,10 +24,22 @@ import {
           tours: action.payload,
           loading: false
         };
+      case GET_PICTURE:
+        return {
+          ...state,
+          pictures: action.payload,
+          loading: false
+        };
       case ADD_TOUR:
         return {
           ...state,
           tours: [action.payload, ...state.tours],
+          loading: false
+        };
+      case ADD_PICTURE:
+        return {
+          ...state,
+          pictures: [action.payload, ...state.pictures],
           loading: false
         };
       case UPDATE_TOUR:
@@ -39,6 +55,14 @@ import {
           ...state,
           tours: state.tours.filter(
             tour => tour._id !== action.payload
+          ),
+          loading: false
+        };
+      case DELETE_PICTURE:
+        return {
+          ...state,
+          pictures: state.pictures.filter(
+            picture => picture._id !== action.payload
           ),
           loading: false
         };
@@ -70,7 +94,7 @@ import {
           ...state,
           filtered: state.tours.filter(tour => {
             const regex = new RegExp(`${action.payload}`, 'gi');
-            return tour.name.match(regex) || tour.section.match(regex) || tour.text.match(regex);
+            return tour.name.match(regex) || tour.type.match(regex);
           })
         };
       case CLEAR_FILTER:
@@ -79,6 +103,11 @@ import {
           filtered: null
         };
       case TOUR_ERROR:
+        return {
+          ...state,
+          error: action.payload
+        };
+      case PICTURE_ERROR:
         return {
           ...state,
           error: action.payload

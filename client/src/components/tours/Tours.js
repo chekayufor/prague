@@ -1,8 +1,8 @@
 import React, {Fragment, useContext} from 'react';
-// import {Link, useRouteMatch} from 'react-router-dom';
+import {Link, useRouteMatch} from 'react-router-dom';
 // import { CSSTransition, TransitionGroup } from 'react-transition-group';
 
-import {Link} from 'react-router-dom';
+// import {Link} from 'react-router-dom';
 import TourContext from '../../context/tour/tourContext';
 import styled from 'styled-components';
 // import Tour from './Tour';
@@ -12,9 +12,9 @@ import Spinner from '../layout/Spinner';
 const Tours = (props) => {
     const tourContext=useContext(TourContext);
     const {loading, filtered, tours} = tourContext;
-console.log({props})
+    console.log({props})
     
-    // let { url } = useRouteMatch();
+    let { url } = useRouteMatch();
     return (
         <Fragment>
         <Ul>
@@ -28,12 +28,8 @@ console.log({props})
                                 </ImageContainer>
                                 <Div>
                                     <Text>{text.slice(0, 100)}
-                                    <Link  to = {{
-                                        pathname:`/tours/${_id}`,
-                                        tourProps:{
-                                            _id, name, section,text, img, cost,start,duration,included,unincluded,necessary,location,language,type,date
-                                        }
-                                    }} style={{alignItems: 'center',
+                                    <Link  to={`/tours/${_id}`}
+                                     style={{alignItems: 'center',
                                         display: 'flex', fontWeight:'bold',    justifyContent: 'center'}}>
                                         <Span>...</Span>
                                     </Link> 
@@ -49,12 +45,8 @@ console.log({props})
                                 </ImageContainer>
                                 <Div>
                                     <Text>{text.slice(0, 100)}
-                                    <Link  to = {{
-                                        pathname:`/tours/${_id}`,
-                                        tourProps:{
-                                            _id, name, section,text, img, cost,start,duration,included,unincluded,necessary,location,language,type,date
-                                        }
-                                    }} style={{alignItems: 'center',
+                                    <Link  to={`/tours/${_id}`}
+                                    style={{alignItems: 'center',
                                         display: 'flex', fontWeight:'bold',    justifyContent: 'center'}}>
                                         <Span>...</Span>
                                     </Link> 
@@ -144,6 +136,7 @@ const Img = styled.img`
 `
 export default Tours
 
+            // <Link to={`${props.match.url}/tours/${_id}`} from={props.match.url}>123456</Link>
             // <Route path={`${url}/tours/:tourId`} render={
             //         props => {
             //         const tour = tours.find(tour => tour.id.toString() === props.match.params.tourId)
@@ -153,7 +146,14 @@ export default Tours
             //         return <Tour {...props} {...tour}/>
             //     }
             // }/>
-            // <Link to = {`${url}/tours/${id}`}style={{alignItems: 'center',
+            // <Link to = {`${url}/tours/${id}`} style={{alignItems: 'center',
             //             display: 'flex', fontWeight:'bold'}}>
             //             <Span>...</Span>
             //         </Link>
+            // to = {{
+            // pathname:`/tours/${_id}`,
+            // tours: {tours}
+            // tourProps:{
+            //     _id, name, section,text, img, cost,start,duration,included,unincluded,necessary,location,language,type,date
+            // }
+            // }} 

@@ -1,23 +1,28 @@
 import React, { useState, useContext, useEffect } from 'react';
 import {withRouter} from 'react-router-dom'
 import AuthContext from '../../context/auth/authContext';
-import AlertContext from '../../context/alert/alertContext';
+// import AlertContext from '../../context/alert/alertContext';
+import 'materialize-css/dist/css/materialize.min.css';
+import M from 'materialize-css/dist/js/materialize.min.js';
 
 const Login = props => {
-  const alertContext = useContext(AlertContext);
+  // const alertContext = useContext(AlertContext);
   const authContext = useContext(AuthContext);
 
-  const { setAlert } = alertContext;
+  // const { setAlert } = alertContext;
   const { login, error, clearErrors, isAuthenticated } = authContext;
 
   console.log({props})
   useEffect(() => {
+    M.AutoInit();
+
     if (isAuthenticated) {
       props.history.push('/privet');
     }
 
     if (error === 'Invalid Credentials') {
-      setAlert(error, 'danger');
+      // setAlert(error, 'danger');
+      M.toast({html:`${error}`})
       clearErrors();
     }
     // eslint-disable-next-line
@@ -35,7 +40,8 @@ const Login = props => {
   const onSubmit = e => {
     e.preventDefault();
     if (email === '' || password === '') {
-      setAlert('Please fill in all fields', 'danger');
+      // setAlert('Please fill in all fields', 'danger');
+      M.toast({html:'Пожалуйста заполните все поля'})
     } else {
       login({
         email,

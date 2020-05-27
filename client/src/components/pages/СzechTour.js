@@ -19,7 +19,7 @@ const getPageTours = () => {
          arr = tours.filter(tour => 
             tour.type.toString() === 'europe'
         )
-        console.log({arr})
+        // console.log({arr})
     }
     // return setPragueTours(arr);
     return arr;

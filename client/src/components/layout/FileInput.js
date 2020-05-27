@@ -1,30 +1,33 @@
-import React, {useRef, useState } from 'react';
+import React, {useRef, useState, useContext } from 'react';
 import styled from 'styled-components';
+import TourContext from '../../context/tour/tourContext';
 
 const FileInput = ({pic, setPic}) => {
-const [selectedFile, setSelectedFile] = useState(null)
+const [selectedFile, setSelectedFile] = useState(null);
+const tourContext = useContext(TourContext);
+const { addPicture, loading, pictures } = tourContext;
     const fileInput = useRef();
 
     const FileSelect = (e) => {
         e.preventDefault();
-        // alert(
-        //     `Selected file - ${fileInput.current.files[0].name}`
-        // );
-        // console.log(fileInput.current.files[0])
-        setSelectedFile(fileInput.current.files[0]);
+        // setUploading(true);
+        // const picId = await axios.put(`/api/upload/${tour.id}`);
+        // setUploading(false);
+        // setPic([...pic, picId]);
+        addPicture(fileInput.current.files[0]);
+        console.log({pictures})
+        // setPic([...pic, fileInput.current.files[0]]);
+    }
+    const onUploadSubmit = () => {
+
     }
 
-    const HandleSubmit = () => {
-        setPic([...pic, selectedFile]);
-    }
-//   console.log(selectedFile);
       return (
         <Form >
             <Label>
                 Загрузите файл:
                 <Input type="file" ref={fileInput} onChange={FileSelect}/>
             </Label>
-            <Button onClick={HandleSubmit} >Add</Button>
         </Form>
       );
   }

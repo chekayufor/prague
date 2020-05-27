@@ -32,8 +32,8 @@ const CarouselReactSlick = ({imgList}) => {
     return (
         <SlideContainer>
             <Slider {...settings}>
-            {imgList.map(({ id, img, name, linkCode })=>(
-                <Slide key={id}>
+            {imgList.map(({ id, img, name, linkCode },index)=>(
+                <Slide data-index={index} key={id}>
                     <A target="_blank" href={linkCode}>
                         <Image src={img} />
                     </A>

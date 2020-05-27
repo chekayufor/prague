@@ -51,12 +51,13 @@ const App = () => {
           <Alerts/>
           <Switch>
             <Route exact path='/' component = {MainContainer}/>
-            <Route path='/pragueTour' component = {PragueTour}/>
+            <Route path='/pragueTour' render={(props =>(
+              <PragueTour {...props}/>))}/>
             <Route path='/czechTour' component = {CzechTour}/>
             <Route path='/europeTour' component = {EuropeTour}/> 
             <Route path='/transfer' component = {Transfer}/>
             <Route path='/register' component = {Register}/>
-            <Route path={`/tours/:tourId`} render={(props)=> (
+            <Route path='/:tours/:tourId' render={(props)=> (
               <Tour {...props} />)}/>
               
               <Route exact path='/login' component={Login} />

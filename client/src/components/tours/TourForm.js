@@ -8,86 +8,64 @@ import Emoji from '../layout/Emoji'
 
 const TourForm = () => {
     const [pic, setPic] = useState([]);
-    // const [tourCost, setTourCost] = useState([]);
-    
+    const [tour, setTour] = useState({
+      name:'',
+      section:'',
+      text:'',
+      img:[],
+      // cost:Object.values(tourCost),
+      cost1:'',
+      cost2:'',
+      cost3:'',
+      cost4:'',
+      duration:'',
+      included:'',
+      unincluded:'',
+      necessary:'',
+      location:'',
+      language:'',
+      type:'',
+      start:''
+});
     const tourContext = useContext(TourContext);
-    const { addTour, updateTour, clearCurrent, current } = tourContext;
+    const { addTour, updateTour, clearCurrent, current, pictures, loading, deletePicture } = tourContext;
 
-// console.log({pic})
+console.log({pictures})
   useEffect(() => {
     if (current !== null) {
       setTour(current);
     } else {
-      setTour({
-        name:'',
-        section:'',
-        text:'',
-        img:'',
-        cost1:'',
-        cost2:'',
-        cost3:'',
-        cost4:'',
-        duration:'',
-        included:'',
-        unincluded:'',
-        necessary:'',
-        location:'',
-        language:'',
-        type:'',
-        start:''
-      });
+      setTour(tour);
     }
   }, [tourContext, current]);
-
-  const [tour, setTour] = useState({
-        name:'',
-        section:'',
-        text:'',
-        img:(pic!==null)? pic:'',
-        // cost:Object.values(tourCost),
-        cost1:'',
-        cost2:'',
-        cost3:'',
-        cost4:'',
-        duration:'',
-        included:'',
-        unincluded:'',
-        necessary:'',
-        location:'',
-        language:'',
-        type:'',
-        start:''
-  });
-
-  // console.log({tour})
-  // console.log({current})
   const { name, section,text, img, cost1,cost2,cost3,cost4,duration,included,unincluded,necessary,location,language,type,start } = tour;
-  // console.log({type})
 
   const onChange = e =>{
-    // console.log('e.target.name', e.target.name)
-    console.log('e.target.value', e.target.value)
     setTour({ ...tour, [e.target.name]: e.target.value });
   }
 
   const onSubmit = e => {
     e.preventDefault();
+    const newTour = { ...tour, img: pictures };
+
+    setTour(newTour);
     if (current === null) {
-      addTour(tour);
+      addTour(newTour);
     } else {
-      updateTour(tour);
+      updateTour(newTour);
     }
     clearAll();
   };
-  const onDelete = (id)=>{
-    // console.log({id})
-    let pics = pic.filter(el => el.name !== id);
-    setPic(pics)
-  }
+  // const onDelete = (id)=>{
+  //   // console.log({id})
+  //   let pics = pic.filter(el => el.name !== id);
+  //   setPic(pics)
+  // }
 
   const clearAll = () => {
     clearCurrent();
-  };
+    setPic([]);
+  }
 
   return (
     <FormContainer onSubmit={onSubmit}>
@@ -323,10 +301,10 @@ const TourForm = () => {
       <FileInput pic={pic} setPic={setPic}/>
       <div>
         <ul>
-          {pic !== null && pic.length!== 0? (pic.map((i, index) => (
+          {pictures !== null && pictures.length!== 0? (pictures.map((i, index) => (
               <PicContainer key={index}>
                 <Li key={i.name}><img  alt={i.name} src={i}/></Li>
-                <Button onClick={(e)=> onDelete(i.name)}><Emoji symbol='❌' label='button'/></Button>
+                <Button onClick={(e)=> deletePicture(i.name)}><Emoji symbol='❌' label='button'/></Button>
               </PicContainer>
             ))):(
               <p style={{fontFamily:'cursive'}}>Нет загруженных фотографий</p>

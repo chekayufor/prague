@@ -4,24 +4,29 @@ import TourContext from '../../context/tour/tourContext';
 import Spinner from '../layout/Spinner';
 import Emoji from '../layout/Emoji'
 
-// import {useParams} from 'react-router-dom';
 import CarouselReactSlickFade from '../layout/carousel/CarouselReactSlickFade';
-import { withRouter } from 'react-router-dom';//navigation for goBack 
+import { withRouter } from 'react-router-dom'; 
+
+import 'materialize-css/dist/css/materialize.min.css';
+import M from 'materialize-css/dist/js/materialize.min.js';
+
+import ModalZakaz from '../layout/button/ModalZakaz';
+import ZakazButton from '../layout/button/ZakazButton';
 
 const Tour = (props) => {
     const tourContext=useContext(TourContext);
-    const {setTour, tour, loading} = tourContext;
-    console.log({props})
+    const {getTours, setTour, tour, tours} = tourContext;
+    // console.log({props})
+    console.log({tours})
+    console.log({tour})
 
-    useEffect(() => {
-       if(props.location.tourProps && props.location.tourProps!==undefined) setTour(props.location.tourProps);
-       
-        //eslint-disable-next-line
-    }, [props.location.tourProps]);
-
-    // const isPageRefreshed=()=> {
-    //     return window.performance && performance.navigation.type === 1;
-    //   }
+    useEffect(()=>{
+        M.AutoInit();
+        getTours();
+        if(props && props !== undefined)    
+        setTour(props.match.params.tourId);
+       // eslint-disable-next-line
+    },[])
     
     const Formatter = (text) => {
          text.replace('//n', <br/>)
@@ -29,18 +34,131 @@ const Tour = (props) => {
 
     return (
         <Container>
-        {tour !== null && !loading ? (
-            <Fragment>
-            <H3>{tour.name}</H3>
-            <Div>
-                <Button onClick={props.history.goBack}><Emoji symbol='⬅️' label='button'/>Назад </Button>
-            </Div>
-            <Content>
-                <CarouselReactSlickFade pic={tour.img}/>
-                <ContentText>
-                    <p>{tour.text}</p>
-                </ContentText>
-            </Content>
+        {tour !== null && tours !== null ? (
+            <Fragment> {
+                tours.filter(i => tour === i._id).map(i=>(
+                    <Fragment>
+                    <H1>{i.name}</H1>
+                    <Div>
+                        <ButtonContainer style={{ justifyContent: 'flex-start'}}>
+                            <Button onClick={props.history.goBack}><Emoji symbol='⬅️' label='button'/>
+                                <span style = {{paddingLeft: '10px',  color:'rgb(119, 140, 165)'}} >Назад </span>
+                            </Button>
+                        </ButtonContainer>
+                    </Div>
+                    <ZakazButton/>
+                    <ModalZakaz/>
+                    <Content>
+                        <CarouselReactSlickFade pic={i.img}/>
+                        {i.text && <ContentText>
+                            <p>{i.text}</p>
+                        </ContentText>
+                        }
+                
+                        <Discription>
+                            <Conditions>
+                            <h5>Дополнительные условия</h5>
+                            <ul>
+                            {i.duration && (
+                                <P>
+                                Продолжительность экскурсии:
+                                <li>
+                                {i.duration}
+                                </li>
+                                </P>
+                            )}
+                            {i.start && (
+                                <P>
+                                Время начала экскурсии:
+                                <li>
+                                {i.start}
+                                </li>
+                                </P>
+                            )}
+                            {i.location && (
+                                <P>
+                                Место встречи:
+                                <li>
+                                {i.location}
+                                </li>
+                                </P>
+                            )}
+                            {i.necessary && (
+                                <P>
+                                Необходимо иметь при себе:
+                                <li>
+                                {i.necessary}
+                                </li>
+                                </P>
+                            )}
+                            {i.language && (
+                                <P>
+                                Язык: 
+                                <li>
+                                {i.language}
+                                </li>
+                                </P>
+                            )}
+                            </ul>
+                            </Conditions>
+                            <CostTerms>
+                            <h5>Стоимость</h5>
+                            <ul>
+                            {i.cost1 && (
+                                <P>
+                                Цена за 1-3 чел:
+                                <li>
+                                {i.cost1}
+                                </li>
+                                </P>
+                            )}
+                            {i.cost2 && (
+                                <P>
+                                Цена за 4-7 чел:
+                                <li>
+                                {i.cost2}
+                                </li>
+                                </P>
+                            )}
+                            {i.cost3 && (
+                                <P>
+                                Цена за 8-15 чел:
+                                <li>
+                                {i.cost3}
+                                </li>
+                                </P>
+                            )}
+                            {i.cost4 && (
+                                <P>
+                                Цена за 16 и более чел:
+                                <li>
+                                {i.cost4}
+                                </li>
+                                </P>
+                            )}
+                            </ul>
+                            {i.included && (
+                                <P>
+                                Включено в стоимость:
+                                <li>
+                                {i.included}
+                                </li>
+                                </P>
+                            )}
+                            {i.unincluded && (
+                                <P>
+                                Не включено в стоимость экскурсии:
+                                <li>
+                                {i.unincluded}
+                                </li>
+                                </P>
+                            )}
+                            </CostTerms>
+                        </Discription> 
+                    </Content>
+                    </Fragment>
+                ))
+            }
             </Fragment>
         ):(
             <Spinner/>
@@ -62,27 +180,44 @@ const Tour = (props) => {
         display:grid;
         align-content: center;
         justify-content: center;
+        justify-items: center;
         @media (max-width: 769px) {
             min-width: 100%;
         }
     `
-    const H3=styled.h3`
-        font-size: 2.2rem;
-        line-height: 110%;
-        margin: 120px 40px 20px 40px;
-        @media (min-width: 1024px) {
-            font-size: 2.6rem;
+    const H1=styled.h1`
+        color:#919aaf;
+        font-size:24px;
+        text-align:center;
+        margin: 150px 40px 20px 40px;
+        padding: 0 2rem 0 2rem;
+        /* margin-top:0; */
+        font-weight:bold;
+        @media (min-width: 600px) {
+            font-size:36px;
+            padding:0 2rem 0 2rem;
+            font-size:36px;
+            border-radius: 10px;
+            filter: drop-shadow(1px 1px 1px black);
         }
-        @media (min-width: 1400px) {
-            font-size: 4rem;        }
-    `
+        @media (min-width: 1024px) {
+            font-size:48px;
+        }
+        @media (min-width: 1480px) {
+            font-size:62px;
+        }
+    /*     
+    @media (min-width: 1800px)and(min-height:1020px) {
+        /* padding:0 2rem 0 2rem; */
+    } */
+`
     const Content = styled.div`
         display: grid;
         justify-content: center;
         justify-items: center;
         text-align: center;
-        padding: 10px;
-        @media (min-width: 1024px) {
+        padding: 10px 10px 0 10px;
+        /* @media (min-width: 1024px) {
             width: 980px;
         }
         @media (min-width: 1400px) {
@@ -90,20 +225,53 @@ const Tour = (props) => {
         }
         @media (min-width: 1800px) {
             width: 1600px;
-        }
+        } */
     `
-    const Div=styled.div`
-        display:grid;
-        height:50px;
-        align-items:center;
-        position: relative;
+    const Div = styled.div`
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            height: 100px;
+            width: 100%;
+            -webkit-align-items: center;
+            -webkit-box-align: center;
+            -ms-flex-align: center;
+            align-items: center;
+            position: relative;
+            padding: 1rem;
+    `
+    const ButtonContainer=styled.div`
+        height:100%;
+        width:100%;
+        display:flex;
+
     `
     const Button = styled.button`
-        height: 40px;
+        height: 50px;
         width: 150px;
         font-size: 1.2rem;
+        text-transform:uppercase;
         position: fixed;
-        background: #8dd6da57;
+        background: #e3eeef57;
+        border-radius:7px;
+        border: solid 1px #919aaf;
+        z-index: 900;
+        @media (min-width: 1024px) {
+            font-size: 1.4rem;
+        }
+        @media (min-width: 1400px) {
+            font-size: 1.6rem;
+        }
+    `
+    const ButtonZakaz = styled.button`
+        height: 50px;
+        width: 150px;
+        text-transform:uppercase;
+        font-size: medium;
+        position: fixed;
+        background: rgba(243, 21, 4, 0.74);
+        color:white;
+        border-radius:7px;
+        border: solid 1px #919aaf;
         z-index: 900;
         @media (min-width: 1024px) {
             font-size: 1.4rem;
@@ -114,15 +282,68 @@ const Tour = (props) => {
     `
     const ContentText= styled.div`
         display: grid;
+        margin-top: 6rem;
         align-items: center;
         text-align: start;
         padding: 20px 40px;
         font-size: 1.2rem;
-        @media (min-width: 1024px) {
+         @media (min-width: 1024px) {
             font-size: 1.4rem;
+            width: 980px;
         }
         @media (min-width: 1400px) {
+            width: 1200px;
+        }
+        @media (min-width: 1800px) {
+            width: 1600px;
+        }
+        /*@media (min-width: 1400px) {
             font-size: 2rem;
+        } */
+    `
+    
+    const Discription=styled.div`
+        display:grid;
+        background-color: rgba(0,0,0,0.12);
+        font-size:1.1rem;
+        @media (min-width: 1024px) {
+            font-size: 1.2rem;
+        }
+        /* @media (min-width: 1400px) {
+            font-size: 1.8rem;
+        } */
+    `
+    const Conditions=styled.div`
+        display:grid;
+        width: fit-content;
+        justify-self: center;
+        margin:0 20px;
+    `
+    const CostTerms=styled.div`
+        display:grid;
+        margin:0 20px;
+
+        ul{
+            width: fit-content;
+            justify-self: center;
+        }
+
+    `
+    const P = styled.p`
+        display:grid;
+        grid-template-columns:1fr 1fr;
+        /* font-size: medium; */
+        font-style: italic;
+        font-weight: 600;
+        text-align: end;
+        li{
+            text-align:start;
+            padding-left:30px;
+            list-style:none;
+            /* font-style: italic; */
+            font-weight: 300;
         }
     `
+
+
 export default withRouter(Tour);
