@@ -30,7 +30,7 @@ const TourForm = () => {
     const tourContext = useContext(TourContext);
     const { addTour, updateTour, clearCurrent, current, pictures, loading, deletePicture } = tourContext;
 
-console.log({pictures})
+    console.log({pictures})
   useEffect(() => {
     if (current !== null) {
       setTour(current);
@@ -40,14 +40,14 @@ console.log({pictures})
   }, [tourContext, current]);
   const { name, section,text, img, cost1,cost2,cost3,cost4,duration,included,unincluded,necessary,location,language,type,start } = tour;
 
-  const onChange = e =>{
+  const onChange = e => {
     setTour({ ...tour, [e.target.name]: e.target.value });
   }
 
   const onSubmit = e => {
     e.preventDefault();
-    const newTour = { ...tour, img: pictures };
 
+    const newTour = { ...tour, img:pic };
     setTour(newTour);
     if (current === null) {
       addTour(newTour);
@@ -65,6 +65,25 @@ console.log({pictures})
   const clearAll = () => {
     clearCurrent();
     setPic([]);
+    setTour({
+      name:'',
+      section:'',
+      text:'',
+      img:[],
+      // cost:Object.values(tourCost),
+      cost1:'',
+      cost2:'',
+      cost3:'',
+      cost4:'',
+      duration:'',
+      included:'',
+      unincluded:'',
+      necessary:'',
+      location:'',
+      language:'',
+      type:'',
+      start:''
+})
   }
 
   return (
@@ -183,8 +202,7 @@ console.log({pictures})
         </label>
         </p>
         <p>
-          <label>
-          Цена за 16 и более чел:
+          <label> Цена за 16 и более чел:
             <Input
               type='text'
               name='cost4'

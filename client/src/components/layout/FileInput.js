@@ -10,23 +10,17 @@ const { addPicture, loading, pictures } = tourContext;
 
     const FileSelect = (e) => {
         e.preventDefault();
-        // setUploading(true);
-        // const picId = await axios.put(`/api/upload/${tour.id}`);
-        // setUploading(false);
-        // setPic([...pic, picId]);
+        console.log('fileInput.current.files[0]', fileInput.current.files[0]);
         addPicture(fileInput.current.files[0]);
         console.log({pictures})
         // setPic([...pic, fileInput.current.files[0]]);
-    }
-    const onUploadSubmit = () => {
-
     }
 
       return (
         <Form >
             <Label>
                 Загрузите файл:
-                <Input type="file" ref={fileInput} onChange={FileSelect}/>
+                <Input type="file" name="file" ref={fileInput} onChange={FileSelect}/>
             </Label>
         </Form>
       );

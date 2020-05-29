@@ -1,12 +1,18 @@
 const express = require('express');
 require ('dotenv').config();
-const moment = require('moment')
-// var multer = require('multer');
+const moment = require('moment');
+
+var multer = require('multer');
+var cors = require('cors');
+
 const connectDB = require('./config/db');
 const nodemailer = require('nodemailer');
 
 //start express
 const app = express();
+
+//CORS middleware.
+app.use(cors());
 
 //connect DB
 connectDB();
@@ -79,6 +85,39 @@ app.post('/api/send', (req, res) => {
     res.json({message: 'Message received!'})
 });
 
+//uploading pictures
+var storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+    cb(null, '../client/public')
+  },
+  filename: function (req, file, cb) {
+    cb(null, Date.now() + '-' +file.originalname )
+  }
+});
+
+//Create an upload instance and receive a single file
+var upload = multer({ storage: storage }).single('file');
+
+//Setup thePOSTroute to upload a file
+app.post('/upload', async (req, res) => {
+    console.log('POST______________req.file', req.file);
+    try {
+        await upload(req, res, (err) => {
+            console.log('upload______________req.file', req.file);
+               if (err instanceof multer.MulterError) {
+                   return res.status(500).json(err)
+               } else if (err) {
+                   return res.status(500).json(err)
+               }
+          return res.status(200).send(req.file)
+        })
+    } catch (err) {
+        console.error(err.message);
+            res.status(500).send('Server Error');
+    }
+    console.err('POST______________res.file', res.message);
+  
+});
 
 app.get('/',(res, req)=>{
     console.log('app.get', res)

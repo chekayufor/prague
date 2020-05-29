@@ -57,6 +57,7 @@ const TourState = props => {
     const config = {
       headers: {
         'Content-Type': 'application/json'
+        //  'Content-Type': 'multipart/form-data'
       }
     };
 
@@ -101,7 +102,6 @@ const TourState = props => {
     };
 
     try {
-      debugger;
       const res = await axios.put(
         `/api/excursion/${tour._id}`,
         tour,
@@ -169,7 +169,7 @@ const TourState = props => {
   // Add Pictures
   const addPicture = async picture => {
     const formData = new FormData();
-    formData.append('myImage', picture)
+    formData.append('file', picture);
     const config = {
       headers: {
         'Content-Type': 'multipart/form-data'
