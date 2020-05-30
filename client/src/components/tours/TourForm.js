@@ -321,7 +321,7 @@ const TourForm = () => {
         <ul>
           {pictures !== null && pictures.length!== 0? (pictures.map((i, index) => (
               <PicContainer key={index}>
-                <Li key={i.name}><img  alt={i.name} src={i}/></Li>
+                <Li key={i.name}><img  alt={i.name} src={i.path.replace(/^\.\.\/client\/public/, '')}/></Li>
                 <Button onClick={(e)=> deletePicture(i.name)}><Emoji symbol='❌' label='button'/></Button>
               </PicContainer>
             ))):(
