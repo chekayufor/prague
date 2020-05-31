@@ -24,8 +24,8 @@ import {
 const TourState = props => {
   const initialState = {
     tours: null,
-    pictures:null,
-    picture:null,
+    pictures: [],
+    picture: null,
     current: null,
     tour: null,
     filtered: null,
@@ -177,10 +177,12 @@ const TourState = props => {
     };
     try {
       const res = await axios.post('/upload', formData, config);
-      dispatch({
-        type: ADD_PICTURE,
-        payload: res.data
-      });
+      setTimeout(() => {
+        dispatch({
+          type: ADD_PICTURE,
+          payload: res.data
+        });
+      }, 100);
     } catch (err) {
       dispatch({
         type: PICTURE_ERROR,

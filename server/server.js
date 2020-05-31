@@ -88,7 +88,7 @@ app.post('/api/send', (req, res) => {
 //uploading pictures
 var storage = multer.diskStorage({
     destination: function (req, file, cb) {
-    cb(null, '../client/public')
+    cb(null, '../client/public/uploads')
   },
   filename: function (req, file, cb) {
     cb(null, Date.now() + '-' +file.originalname )
@@ -115,7 +115,7 @@ app.post('/upload', async (req, res) => {
         console.error(err.message);
             res.status(500).send('Server Error');
     }
-    console.err('POST______________res.file', res.message);
+    console.error('POST______________res.file', res.message);
   
 });
 
