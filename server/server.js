@@ -3,7 +3,11 @@ require ('dotenv').config();
 const moment = require('moment');
 
 var multer = require('multer');
+// const gcsSharp = require('multer-sharp'); 
+
+// resizer
 var cors = require('cors');
+const fs = require('fs').promises;
 
 const connectDB = require('./config/db');
 const nodemailer = require('nodemailer');
@@ -13,6 +17,8 @@ const app = express();
 
 //CORS middleware.
 app.use(cors());
+//static folder
+app.use(express.static('public'));
 
 //connect DB
 connectDB();
@@ -88,19 +94,32 @@ app.post('/api/send', (req, res) => {
 //uploading pictures
 var storage = multer.diskStorage({
     destination: function (req, file, cb) {
-    cb(null, '../client/public/uploads')
+    cb(null, '../client/public/upload')
   },
   filename: function (req, file, cb) {
     cb(null, Date.now() + '-' +file.originalname )
   }
 });
+//resize with multer-sharp
+// var storage = multer.gcsSharp({
+//     destination: function (req, file, cb) {
+//     cb(null, '../client/public/uploads')
+//   },
+//   filename: function (req, file, cb) {
+//     cb(null, Date.now() + '-' +file.originalname )
+//   },
+//   size: {
+//     width: 400,
+//     height: 400
+//   }
+// });
 
 //Create an upload instance and receive a single file
 var upload = multer({ storage: storage }).single('file');
 
-//Setup thePOSTroute to upload a file
+//Setup the POST route to upload a file
 app.post('/upload', async (req, res) => {
-    console.log('POST______________req.file', req.file);
+    // console.log('POST______________req.file', req.file);
     try {
         await upload(req, res, (err) => {
             console.log('upload______________req.file', req.file);
@@ -113,11 +132,26 @@ app.post('/upload', async (req, res) => {
         })
     } catch (err) {
         console.error(err.message);
-            res.status(500).send('Server Error');
+        res.status(500).send('Server Error');
     }
     console.error('POST______________res.file', res.message);
   
 });
+// DELETE /upload file
+
+app.delete('/upload/:filename', async (res, req) => {
+    // console.log('delete______________req.file', req)
+    try {
+        await fs.unlink('/upload/' + req.params.filename);
+         console.log('File has been Deleted');
+
+    } catch (err) {
+        console.log(err);
+        res.status(500).send('Server Error');
+    }
+    console.log('File has been Deleted');
+  });
+
 
 app.get('/',(res, req)=>{
     console.log('app.get', res)

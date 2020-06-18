@@ -46,15 +46,15 @@ router.post(
         if (!errors.isEmpty()) {
             return res.status(400).json({ errors: errors.array() });
         }
-
-        const { name, section, text, img: pic, cost1,cost2,cost3,cost4, start, duration, included, unincluded, necessary, location, language, type } = req.body;
+        console.log('upload______________req.file', req.body);
+        const { name, section, text, img: pictures, cost1,cost2,cost3,cost4, start, duration, included, unincluded, necessary, location, language, type } = req.body;
 
         try {
             const newExcursion = new Excursion({
                 name,
                 section,
                 text,
-                img:[...pic],
+                img:[...pictures],
                 cost1,
                 cost2,
                 cost3,
@@ -69,7 +69,7 @@ router.post(
                 type,
                 user: req.user.id,
             });
-
+            
             const excursion = await newExcursion.save();
 
             res.json(excursion);

@@ -17,7 +17,7 @@ const ExcursionSchema = mongoose.Schema({
         type: String
     },
     img: {
-        type: [String]
+        type: []
     },
     cost1: {
         type: String
