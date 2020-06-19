@@ -3,11 +3,12 @@ import Slider from 'react-slick'
 import styled from 'styled-components'
 
 const CarouselReactSlick = ({imgList}) => {
+    console.log({imgList})
     const settings={
         dots:false,
         infinity: true,
         autoplay:true,
-        autoplaySpeed:3000,
+        autoplaySpeed:2000,
         slidesToShow: 4,
         slidesToScroll: 1,
         arrows:false,
@@ -32,9 +33,9 @@ const CarouselReactSlick = ({imgList}) => {
     return (
         <SlideContainer>
             <Slider {...settings}>
-            {imgList.map(({ id, img, name, linkCode },index)=>(
-                <Slide data-index={index} key={id}>
-                    <A target="_blank" href={linkCode}>
+            {imgList && imgList.map((img, index)=>(
+                <Slide data-index={index} key={index}>
+                    <A target="_blank">
                         <Image src={img} />
                     </A>
                 </Slide>           

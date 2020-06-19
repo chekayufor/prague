@@ -1,11 +1,8 @@
 import React, {Fragment, useContext} from 'react';
 import {Link, useRouteMatch} from 'react-router-dom';
-// import { CSSTransition, TransitionGroup } from 'react-transition-group';
-
-// import {Link} from 'react-router-dom';
 import TourContext from '../../context/tour/tourContext';
 import styled from 'styled-components';
-// import Tour from './Tour';
+
 import Spinner from '../layout/Spinner';
 
 
@@ -15,19 +12,25 @@ const Tours = (props) => {
     console.log({props})
     
     let { url } = useRouteMatch();
+
+const random=(list)=> {
+    return list[Math.floor((Math.random()*list.length))];
+}
     return (
-        <Fragment>
-        <Ul>
+        <Ul style={{padding:'0'}}>
             {props.tours !== null && !loading ? (
                    (filtered !== null ) ? (
                         filtered.map(({_id, name, section,text, img, cost,start,duration,included,unincluded,necessary,location,language,type,date}) =>(
-                            <Li key={_id}>
-                                <H3>{name}</H3>
+                            <Li key={_id} style={{padding:'0'}}>
+                                <H5 >{name}</H5>
                                 <ImageContainer>
-                                <Img src={img}/>
+                                {(img !== null && img.length!==null && img!==undefined)?(
+                                    <Img src={random(img).path.replace(/^\.\.\/client\/public/, '')}/>
+                                ):(<Img src='/images/czech.jpeg'/>)
+                                }
                                 </ImageContainer>
                                 <Div>
-                                    <Text>{text.slice(0, 100)}
+                                    <Text>{text.slice(0, 160)}
                                     <Link  to={`/tours/${_id}`}
                                      style={{alignItems: 'center',
                                         display: 'flex', fontWeight:'bold',    justifyContent: 'center'}}>
@@ -37,14 +40,17 @@ const Tours = (props) => {
                                 </Div>
                             </Li>
                         ))):(
-                        props.tours.map(({_id, name, section,text, img, cost,start,duration,included,unincluded,necessary,location,language,type,date}) =>(
-                            <Li key={_id}>
-                                <H3>{name}</H3>
+                            props.tours && props.tours.map(({_id, name, section,text, img, cost,start,duration,included,unincluded,necessary,location,language,type,date}) =>(
+                            <Li key={_id} style={{padding:'0'}} >
+                                <H5 >{name}</H5>
                                 <ImageContainer>
-                                <Img src={img}/>
+                                {(img && img !== null && img.length!==null && img!==undefined )?(
+                                    <Img src={random(img).path.replace(/^\.\.\/client\/public/, '')}/>
+                                ):(<Img src='/images/czech.jpeg'/>)
+                                }
                                 </ImageContainer>
                                 <Div>
-                                    <Text>{text.slice(0, 100)}
+                                    <Text>{text.slice(0, 160)}
                                     <Link  to={`/tours/${_id}`}
                                     style={{alignItems: 'center',
                                         display: 'flex', fontWeight:'bold',    justifyContent: 'center'}}>
@@ -58,19 +64,19 @@ const Tours = (props) => {
                     <Spinner/>
                 )
             }
-        </Ul> 
-           
-        </Fragment>
+        </Ul>           
     )
 }
-const Ul=styled.ul`
+    const Ul=styled.ul`
        display:grid;
-    @media (min-width: 1024px) {
-        grid-template-columns:1fr 1fr;
-    }
-    @media(min-width: 1224px) {
-        grid-template-columns:1fr 1fr 1fr;
-    }
+       padding: 0;
+        margin:0;
+        @media (min-width: 1024px) {
+            grid-template-columns:1fr 1fr;
+        }
+        @media(min-width: 1470px) {
+            grid-template-columns:1fr 1fr 1fr;
+        }
     `
     const Li=styled.li`
         display:grid;
@@ -84,16 +90,25 @@ const Ul=styled.ul`
         display:grid;
         padding: 20px 40px;
     `
-    const H3=styled.h3`
-        font-size: 1.8rem;
-        line-height: 110%;
-        margin: 40px;
-        height: 70px;
+    const H5=styled.h5`
+        color:#919aaf;
+        font-size:1.3;
+        text-align:center;
+        padding: 0 2rem;
+        margin-bottom:1.5rem;
+        font-weight:bold;
         @media (min-width: 600px) {
-        font-size: 2rem;
+            font-size:36px;
+            font-size:2rem;
+            border-radius: 10px;
+            filter: drop-shadow(1px 1px 1px black);
+        }
+        @media (min-width: 1480px) {
+            font-size:2.4rem;
         }
     `
     const Text=styled.p`
+        font-family: Courier New, monospace;
         font-size:1.4rem;
         display:flex;
         flex-direction:column;
@@ -112,48 +127,24 @@ const Ul=styled.ul`
 
     `
     const ImageContainer=styled.div`
-    height: 260px;
-    width:90%;
-    cursor: pointer;
-    border: double 3px white;
-    -webkit-box-shadow: 0px 0px 20px -8px rgba(0,0,0,1);
-    -moz-box-shadow: 0px 0px 20px -8px rgba(0,0,0,1);
-    box-shadow: 0px 0px 20px -8px rgba(0,0,0,1);
-    overflow: hidden;
-    padding:2px;
-    margin:0 3px 0 3px;
-    @media(min-width: 600px) {
-        height: 280px;
-    }
-    @media (min-width: 1024px) {
-        height: 400px;
-    }
+        height: 320px;
+        width:80%;
+        cursor: pointer;
+        border: double 3px white;
+        -webkit-box-shadow: 0px 0px 20px -8px rgba(0,0,0,1);
+        -moz-box-shadow: 0px 0px 20px -8px rgba(0,0,0,1);
+        box-shadow: 0px 0px 20px -8px rgba(0,0,0,1);
+        overflow: hidden;
+        padding:2px;
+        margin:0 3px 0 3px;
+        @media(min-width: 600px) {
+            width:80%;
+            height:420px;
+        }
     `
-const Img = styled.img`
-    width:100%;
-    height:100%;
-    object-fit: cover;
-`
+    const Img = styled.img`
+        width:100%;
+        height:100%;
+        object-fit: cover;
+    `
 export default Tours
-
-            // <Link to={`${props.match.url}/tours/${_id}`} from={props.match.url}>123456</Link>
-            // <Route path={`${url}/tours/:tourId`} render={
-            //         props => {
-            //         const tour = tours.find(tour => tour.id.toString() === props.match.params.tourId)
-            //         if(!tour){
-            //             return 'Not Found';
-            //         }
-            //         return <Tour {...props} {...tour}/>
-            //     }
-            // }/>
-            // <Link to = {`${url}/tours/${id}`} style={{alignItems: 'center',
-            //             display: 'flex', fontWeight:'bold'}}>
-            //             <Span>...</Span>
-            //         </Link>
-            // to = {{
-            // pathname:`/tours/${_id}`,
-            // tours: {tours}
-            // tourProps:{
-            //     _id, name, section,text, img, cost,start,duration,included,unincluded,necessary,location,language,type,date
-            // }
-            // }} 

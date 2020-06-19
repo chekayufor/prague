@@ -46,7 +46,7 @@ const Toolbar = (props) => {
                 <li><NavLink to='/transfer' activeStyle={{
                     fontWeight: "bold",
                     color: "#79d9fd"
-                }}>Трансфер</NavLink></li>
+                }}>Услуги</NavLink></li>
                 <li><HashLink to='/#contacts' smooth>Контакты</HashLink></li>
              </ul>
         </Fragment>
@@ -62,6 +62,10 @@ const Toolbar = (props) => {
             <div style={{width:'200px'}}>
                 <SearchBar/>
             </div>
+            <Spacer/>
+            <Weather>
+                <a href="https://clck.yandex.ru/redir/dtype=stred/pid=7/cid=1228/*https://yandex.ru/pogoda/10511" target="_blank"><WeatherImg src="https://info.weather.yandex.net/10511/2_white.ru.png?domain=ru" border="0" alt="Яндекс.Погода"/><img width="1" height="1" src="https://clck.yandex.ru/click/dtype=stred/pid=7/cid=1227/*https://img.yandex.ru/i/pix.gif" alt="" border="0"/></a>
+            </Weather>
             <Spacer />
             <BarItems>{
                 (!isAuthenticated && !token)?(gestLinks):(authLinks)
@@ -92,7 +96,7 @@ const BarNavigation = styled.div`
     padding: 0 1rem;
 `
 const BarLogo = styled.div`
-    margin-left: 5rem;
+    margin-left: 3rem;
 
  a {
     color:rgba(0,0,0,1);
@@ -140,6 +144,18 @@ const BarItems = styled.div`
 `
 const Spacer = styled.div`
     flex:1;
+`
+const Weather=styled.div`
+    /* display:flex; */
+    padding-left: 10px;
+    @media (min-width: 600px) {
+      display:none;
+    }
+`
+const WeatherImg=styled.img`
+      width:130px;
+      border-radius: 8%;
+      border-style: double;
 `
 const Div = styled.div`
 @media(min-width: 600px) {

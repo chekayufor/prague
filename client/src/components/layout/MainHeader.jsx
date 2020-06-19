@@ -6,6 +6,9 @@ const MainHeader = () => {
     return (
         <Banner>
             <Parallax>
+            <Weather>
+                <a href="https://clck.yandex.ru/redir/dtype=stred/pid=7/cid=1228/*https://yandex.ru/pogoda/10511" target="_blank"><img src="https://info.weather.yandex.net/10511/2_white.ru.png?domain=ru" border="0" alt="Яндекс.Погода"/><img width="1" height="1" src="https://clck.yandex.ru/click/dtype=stred/pid=7/cid=1227/*https://img.yandex.ru/i/pix.gif" alt="" border="0"/></a>
+            </Weather>
             <Header>
                 <H1>
                 Путешествия — это флирт с жизнью
@@ -43,7 +46,7 @@ const Banner = styled.div`
 
 `
 const Parallax = styled.div`
-    background-image: url('images/banner.jpeg');
+    background-image: url('images/banner-s640.jpg');
     position: static;
     height: 100%;
     width:100%;
@@ -53,6 +56,8 @@ const Parallax = styled.div`
     background-size: contain; 
     @media (min-width: 600px) {
         background-size: cover; 
+        background-image: url('images/banner.jpeg');
+
     }
 `
 const Header = styled.div`
@@ -64,7 +69,7 @@ const Header = styled.div`
     justify-content:center;
     align-items:center;
     align-content:center;
-    margin-bottom:35px;
+    margin-bottom:60px;
     height: fit-content;
     width:100%;
     @media (min-width: 425px) {
@@ -72,19 +77,32 @@ const Header = styled.div`
     } 
     @media (min-width: 600px) {
         margin-bottom:20px;
-        padding-top: 200px;
+        padding-top: 20px;
 
     }
     @media (min-width: 1024px) {
-        height: 500px;
+        /* height: 500px; */
         width: 100%;
-        padding-top: 400px;
+        /* padding-top: 400px; */
     }
     @media (min-width: 1480px) {
         height:auto;
     }
 `
-
+const Weather=styled.div`
+        display:none;
+    @media (min-width: 600px) {
+        display:flex;
+         margin-top: 120px;
+         padding-left: 10px;
+    }
+    img{
+        border-radius: 8%;
+    border-style: double;
+    border: solid 5px lightskyblue;
+    filter: drop-shadow(2px 4px 6px black);
+    }
+`
 const H1=styled.h1`
     color:#ffffff;
     font-size:24px;

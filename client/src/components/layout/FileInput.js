@@ -1,6 +1,8 @@
 import React, {useRef, useState, useContext } from 'react';
 import styled from 'styled-components';
 import TourContext from '../../context/tour/tourContext';
+import Resizer from 'react-image-file-resizer';
+
 
 const FileInput = ({pic, setPic}) => {
 const [selectedFile, setSelectedFile] = useState(null);
@@ -9,9 +11,27 @@ const { addPicture, loading, pictures } = tourContext;
     const fileInput = useRef();
 
     const FileSelect = (e) => {
+       let fInput = false;
         e.preventDefault();
         console.log('fileInput.current.files[0]', fileInput.current.files[0]);
-        addPicture(fileInput.current.files[0]);
+        if(fileInput.current.files[0]){
+            fInput = true;
+        }
+        if(fInput) {
+            Resizer.imageFileResizer(
+                fileInput.current.files[0],
+                400,
+                400,
+                'JPEG',
+                100,
+                0,
+                uri => {
+                    // console.log(uri)
+                },
+                'base64'
+            );
+            addPicture(fileInput.current.files[0]);
+        }
         console.log({pictures})
         // setPic([...pic, fileInput.current.files[0]]);
     }

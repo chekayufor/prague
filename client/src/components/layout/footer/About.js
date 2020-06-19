@@ -50,7 +50,7 @@ const AboutContainer = styled.div`
 
 `
 const ImgContainer= styled.div`
-    background-image:url('images/aboutMe.jpeg');
+    background-image:url('images/aboutMe.jpg');
     height: 260px; 
     width:100%;
     background-position: center;

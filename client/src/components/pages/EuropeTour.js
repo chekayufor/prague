@@ -42,11 +42,11 @@ const Container = styled.div`
     overflow: hidden;
     background-color: #ffffff;
     display:grid;
-    align-content: center;
+    align-content: baseline;
     justify-content: center;
     @media (max-width: 769px) {
         min-width: 100%;
     }
-    `
+`
     
 export default EuropeTour;

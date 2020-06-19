@@ -110,7 +110,9 @@ const Auth = styled.div`
     justify-content:center;
     align-self: flex-end;
     a{
-        color:#000000;
+        color: #ceb2da;
+        font-style: italic;
+        font-size: medium;
     }
     @media(min-width: 600px) {
         justify-content:start;

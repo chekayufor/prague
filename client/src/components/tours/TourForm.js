@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect } from 'react';
+import React, { useState, useContext, useEffect, useRef } from 'react';
 import styled from 'styled-components';
 import TourContext from '../../context/tour/tourContext';
 import ResizableTextarea from '../layout/ResizableTextarea';
@@ -12,8 +12,7 @@ const TourForm = () => {
       name:'',
       section:'',
       text:'',
-      img:[],
-      // cost:Object.values(tourCost),
+      img:'',
       cost1:'',
       cost2:'',
       cost3:'',
@@ -27,27 +26,34 @@ const TourForm = () => {
       type:'',
       start:''
 });
+  // const pictureRef = useRef(null);
+
     const tourContext = useContext(TourContext);
-    const { addTour, updateTour, clearCurrent, current, pictures, loading, deletePicture } = tourContext;
+    const { addTour, updateTour, clearCurrent, current, pictures, loading, deletePicture, setPictures } = tourContext;
 
     console.log({pictures})
+
   useEffect(() => {
     if (current !== null) {
       setTour(current);
+      setTimeout(()=>{if(current.img!==null) setPictures(current.img)}, 300);
     } else {
       setTour(tour);
     }
-  }, [tourContext, current]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [current]);
+
   const { name, section,text, img, cost1,cost2,cost3,cost4,duration,included,unincluded,necessary,location,language,type,start } = tour;
 
   const onChange = e => {
+    console.log(e.target.value );
+    if (e.target.value === '')  e.target.value = null;
     setTour({ ...tour, [e.target.name]: e.target.value });
   }
 
   const onSubmit = e => {
     e.preventDefault();
-
-    const newTour = { ...tour, img:pic };
+    const newTour = { ...tour, img:pictures };
     setTour(newTour);
     if (current === null) {
       addTour(newTour);
@@ -56,21 +62,14 @@ const TourForm = () => {
     }
     clearAll();
   };
-  // const onDelete = (id)=>{
-  //   // console.log({id})
-  //   let pics = pic.filter(el => el.name !== id);
-  //   setPic(pics)
-  // }
 
   const clearAll = () => {
     clearCurrent();
-    setPic([]);
     setTour({
       name:'',
       section:'',
       text:'',
       img:[],
-      // cost:Object.values(tourCost),
       cost1:'',
       cost2:'',
       cost3:'',
@@ -83,8 +82,15 @@ const TourForm = () => {
       language:'',
       type:'',
       start:''
-})
-  }
+    })
+  };
+
+  const deleteItem = index => {
+    const newInventory = pictures.filter(
+      (item, itemIndex) => index !== itemIndex
+    );
+    return setPictures([...newInventory]);
+  };
 
   return (
     <FormContainer onSubmit={onSubmit}>
@@ -142,11 +148,11 @@ const TourForm = () => {
             <input
               type='radio'
               name='section'
-              value='Трансфер'
-              checked={section === 'Трансфер'}
+              value='услуги'
+              checked={section === 'услуги'}
               onChange={onChange}
             />
-            <span>Трансфер</span>
+            <span>Услуги</span>
           </label>
         </p>
       <Label> Описание экскурсии:
@@ -319,10 +325,17 @@ const TourForm = () => {
       <FileInput pic={pic} setPic={setPic}/>
       <div>
         <ul>
-          {pictures !== null && pictures.length!== 0? (pictures.map((i, index) => (
-              <PicContainer key={index}>
-                <Li key={i.name}><img  alt={i.name} src={i.path.replace(/^\.\.\/client\/public/, '')}/></Li>
-                <Button onClick={(e)=> deletePicture(i.name)}><Emoji symbol='❌' label='button'/></Button>
+          {pictures && pictures !== null && pictures.length!== 0? (pictures.map((i, index) => (
+              <PicContainer key={index} >
+                  <img width='auto' height='150' alt={i.filename} src={i.path.replace(/^\.\.\/client\/public/, '')}/>
+                  <p>{i.filename}</p>
+                 <DeleteButton onClick={e => {
+                    e.preventDefault();
+                    deleteItem(index);
+                    // deletePicture(i.filename)
+                  }}>
+                    X
+                    </DeleteButton>
               </PicContainer>
             ))):(
               <p style={{fontFamily:'cursive'}}>Нет загруженных фотографий</p>
@@ -382,15 +395,21 @@ const ButtonContainer = styled.div`
   align-items: center;
   justify-items: start;
 `
-const PicContainer=styled.div`
+const PicContainer=styled.li`
     display:grid;
-    grid-template-columns: 4fr 0.5fr;
+    grid-template-columns: 2fr 2fr 0.5fr;
+    align-items: center;
+    justify-items: self-start;
+    padding: 5px 5px;
 `
-const Button = styled.button`
-  border:none;
-  background:none;
-`
-const Li = styled.li`
-  padding: 5px 0;
+const DeleteButton = styled.button`
+    justify-self: self-end;
+    height: 20px;
+    width: 20px;
+    border: none;
+    color:red;
+    font-weight:900;
+    font-size: 1.4rem;
+    background: none;
 `
 export default TourForm;

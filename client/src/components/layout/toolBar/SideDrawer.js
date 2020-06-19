@@ -29,7 +29,7 @@ const SideDrawer = (props) => {
       <li><Link to='/pragueTour' >Экскурсии по Праге</Link></li>
       <li><Link to='/czechTour'>Экскурсии по Чехии</Link></li>
       <li><Link to='/europeTour'>Экскурсии по Европе</Link></li>
-      <li><Link to='/transfer'>Трансфер</Link></li>
+      <li><Link to='/transfer'>Услуги</Link></li>
       <li><a href='/#about'>Обо мне</a></li>
     </Fragment>
   )
@@ -43,7 +43,15 @@ const SideDrawer = (props) => {
                 Буду рад предложить Вам нестандартные маршруты по самым укромным уголкам Праги и Чехии в дружеской атмосфере, легко, интересно и весело!`}
           </p>
         </div>
-        <SearchBar/>
+        <div style={{flexDirection:'row'}}>
+          <SearchBar/>
+          <button style={{border:'none', background:'none', width:'30px'}} 
+                  onClick={(e) => {
+                    e.preventDefault();
+                    props.backdropClickHandler();
+                  }}
+          >🔎</button>
+        </div>
         <ul onClick={props.backdropClickHandler}>
           {
           (!isAuthenticated && !token)?(gestLinks):(authLinks)
@@ -117,7 +125,7 @@ const SideDrawer = (props) => {
     }
   `
   const ImgContainer= styled.div`
-    background-image:url('images/aboutMe.jpeg');
+    background-image:url('images/aboutMe.jpg');
     /* background-color: #cccccc;  */
     height: 150px; 
     background-position: center;
@@ -127,5 +135,8 @@ const SideDrawer = (props) => {
       height: 200px; 
     }
   `
-
+// const SearchContainer=styled.div`
+//   display:grid;
+//   grid-template-columns:4fr 1fr;
+// `
   export default SideDrawer

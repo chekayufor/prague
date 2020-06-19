@@ -11,7 +11,6 @@ import H2 from '../style/H2Text'
 const Footer = () => {
     return (
         <FooterContainer>
-        <H2>Наши гости</H2>
             <Sociall/>
             <GuestGallery/>
             <About/>

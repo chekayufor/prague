@@ -17,7 +17,8 @@ import {
   PICTURE_ERROR,
   ADD_PICTURE,
   DELETE_PICTURE,
-  GET_PICTURE
+  GET_PICTURE,
+  SET_PICTURES
 
 } from '../types';
 
@@ -166,6 +167,10 @@ const TourState = props => {
     }
   };
 
+  const setPictures = pictures => {
+    dispatch({ type: SET_PICTURES, payload: pictures });
+  };
+
   // Add Pictures
   const addPicture = async picture => {
     const formData = new FormData();
@@ -182,7 +187,7 @@ const TourState = props => {
           type: ADD_PICTURE,
           payload: res.data
         });
-      }, 100);
+      }, 500);
     } catch (err) {
       dispatch({
         type: PICTURE_ERROR,
@@ -192,13 +197,14 @@ const TourState = props => {
   };
 
   // Delete Pictures
-  const deletePicture = async id => {
+  const deletePicture = async filename => {
+    console.log({filename});
     try {
-      await axios.delete(`/upload/${id}`);
+      await axios.delete(`/upload/${filename}`);
 
       dispatch({
         type: DELETE_PICTURE,
-        payload: id
+        payload: filename
       });
     } catch (err) {
       dispatch({
@@ -230,7 +236,8 @@ const TourState = props => {
         setTour,
         getPictures,
         addPicture,
-        deletePicture
+        deletePicture,
+        setPictures
       }}
     >
       {props.children}

@@ -13,7 +13,8 @@ import {
     GET_PICTURE,
     ADD_PICTURE,
     PICTURE_ERROR,
-    DELETE_PICTURE
+    DELETE_PICTURE,
+    SET_PICTURES
   } from '../types';
   
   export default (state, action) => {
@@ -24,30 +25,19 @@ import {
           tours: action.payload,
           loading: false
         };
-      case GET_PICTURE:
-        return {
-          ...state,
-          pictures: action.payload,
-          loading: false
-        };
       case ADD_TOUR:
         return {
           ...state,
           tours: [action.payload, ...state.tours],
           loading: false
         };
-      case ADD_PICTURE:
-        return {
-          ...state,
-          pictures: [action.payload, ...state.pictures],
-          loading: false
-        };
+      
       case UPDATE_TOUR:
         return {
           ...state,
           tours: state.tours.map(tour =>
             tour._id === action.payload._id ? action.payload : tour
-          ),
+            ),
           loading: false
         };
       case DELETE_TOUR:
@@ -58,11 +48,28 @@ import {
           ),
           loading: false
         };
+        case ADD_PICTURE:
+        return {
+          ...state,
+          pictures: [action.payload, ...state.pictures],
+          loading: false
+        };
+        case GET_PICTURE:
+        return {
+          ...state,
+          pictures: action.payload,
+          loading: false
+        };
+        case SET_PICTURES:
+        return {
+          ...state,
+          pictures: action.payload
+        };
       case DELETE_PICTURE:
         return {
           ...state,
           pictures: state.pictures.filter(
-            picture => picture._id !== action.payload
+            picture => picture.filename !== action.payload
           ),
           loading: false
         };
@@ -72,7 +79,8 @@ import {
           tours: null,
           filtered: null,
           error: null,
-          current: null
+          current: null,
+          pictures:[]
         };
       case SET_CURRENT:
         return {
@@ -84,10 +92,12 @@ import {
           ...state,
           tour: action.payload
         };
+      
       case CLEAR_CURRENT:
         return {
           ...state,
-          current: null
+          current: null,
+          pictures:[]
         };
       case FILTER_TOURS:
         return {

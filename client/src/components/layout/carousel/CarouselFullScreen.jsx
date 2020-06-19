@@ -1,49 +1,63 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, Fragment } from "react";
 import styled from "styled-components";
+import YouTubeVideo from '../youtube/YouTubeVideo';
+import H2 from '../style/H2Text';
 
-const CarouselFullScreen = ({imgList}) => {
+
+const CarouselFullScreen = ({videos}) => {
 
   const [index, setIndex] = useState(0);
-
-  const slideWidth = 30; 
-
-    useEffect(()=> {
-      move();
-    }, [index]);
+  console.log({videos})
+  let slideWidth;
+  if (window.matchMedia("(max-width: 600px)").matches) {
+    /* The viewport is less than, or equal to, 600 pixels wide */
+     slideWidth = 24; 
+  } else {
+    /* The viewport is greater than 700 pixels wide */
+    slideWidth = 30; 
+  }
+  
 
     console.log({index});
 
-    const move =() => {
-      let next = (index + 1) % imgList.length;
-      setTimeout(() =>  setIndex(next) , 3000);
+    const moveRight =() => {
+      let next = (index + 1) % videos.length;
+      setTimeout(() =>  setIndex(next) , 100);
+    }
+    const moveLeft =() => {
+      let next = (index - 1) % videos.length;
+      setTimeout(() =>  setIndex(next) , 100);
     }
 
-    // const arrRender = () => {
-    //   if(imgList.length) {
-    //     let newImage = imgList.shift();
-    //     imgList.push(newImage);
-    //   }
-    //   console.log({imgList})
-    //   return imgList;
-    // }
     
   return (
+    <Fragment>
+    {(videos.length!==0)?
+    (<Fragment>
+    <a href="https://www.youtube.com/channel/UCMmsWAmdBLUdAEHuDmypuRQ" target="_blank" rel="noopener noreferrer" style={{paddingBottom:'20px'}}>
+      <H2>Путевые Заметки или Виртуальные Экскурсии</H2>
+    </a>
     <Box>
+    <Button onClick={moveLeft} style={{marginRight: '3px'}}>Prev</Button>
       <Mask >
         <SlideContainer
           x={index * slideWidth}
         >
-          {imgList.map(({ id, img, name, linkCode }, i) => (
-            <Slide key={name}>
-              <A target="_blank" href={linkCode}>
-                {img !== null && <Image src={img} />}
-              </A>
-            </Slide>
-          ))}
+        {
+          videos.slice(0, 7).map(video=>(
+              <Slide key={video.id.videoId}>
+                  <YouTubeVideo video={video}/>
+              </Slide>
+          ))
+      }
         </SlideContainer>
-      </Mask>
+        </Mask>
+        <Button onClick={moveRight} style={{marginLeft: '3px'}}>Next</Button>
     </Box>
-  );
+    </Fragment>):(<Fragment/>)
+    }
+    </Fragment>
+    );
 };
 
 export default CarouselFullScreen;
@@ -51,18 +65,27 @@ export default CarouselFullScreen;
 const Box = styled.div`
   /* display: none; */
   width: 100%;
-  height: 100%;
-  justify-content: start;
-  align-content: center;
+  height: 260px;
+  display: grid;
+  grid-template-columns: 1fr 10fr 1fr; 
+  justify-items: center;
+  align-items: center;
   position: relative;
-  @media (min-width: 1200px) {
-    display: grid;
-    grid-area: 2/2/3/3;
+  padding: 20px 5px;
+  @media (min-width: 600px) {
+    height: 400px;
   }
 `;
 const Mask = styled.div`
   width: 100%;
+  height:100%;
   overflow: hidden;
+  border: double 3px white;
+    -webkit-box-shadow: 0px 0px 20px -8px rgba(0,0,0,1);
+    -moz-box-shadow: 0px 0px 20px -8px rgba(0,0,0,1);
+    box-shadow: 0px 0px 20px -8px rgba(0,0,0,1);
+    overflow: hidden;
+    padding: 2px;
 `;
 const SlideContainer = styled.div`
   width: 100%;
@@ -73,27 +96,19 @@ const SlideContainer = styled.div`
    transform: translateX(${({ x }) => -(x)}rem);
 `;
 const Slide = styled.div`
-  width: 30rem;
+  width: 24rem;
   height: 100%;
-  min-height: 300px;
+  /* min-height: 300px; */
   display: flex;
   justify-content: space-between;
   transition: transform 3s linear;
   transform: translateX(${({ x }) => -(x)}rem);
+  @media (min-width: 600px) {
+    width: 30rem;
+  }
 `;
-const A = styled.a`
-  display: grid;
-  align-content: center;
-  justify-items: center;
-  position: relative;
-  color: white;
-  grid-template-rows: 1fr;
-  grid-template-columns: 100%;
-  cursor: pointer;
+const Button = styled.button`
+    height: 2.2rem;
+    width: 3rem;
+    border-radius: 50%;
 `
-const Image = styled.img`
-  width: 30rem;
-  height:30rem;
-  object-fit: cover;
-  object-position: center;
-`;

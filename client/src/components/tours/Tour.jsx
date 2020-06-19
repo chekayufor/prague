@@ -17,8 +17,8 @@ const Tour = (props) => {
     const tourContext=useContext(TourContext);
     const {getTours, setTour, tour, tours} = tourContext;
     // console.log({props})
-    console.log({tours})
-    console.log({tour})
+    // console.log({tours})
+    // console.log({tour})
 
     useEffect(()=>{
         M.AutoInit();
@@ -26,19 +26,17 @@ const Tour = (props) => {
         if(props && props !== undefined)    
         setTour(props.match.params.tourId);
        // eslint-disable-next-line
-    },[])
+    },[]);
     
-    const Formatter = (text) => {
-         text.replace('//n', <br/>)
-    }
-
     return (
         <Container>
         {tour !== null && tours !== null ? (
-            <Fragment> {
-                tours.filter(i => tour === i._id).map(i=>(
-                    <Fragment>
-                    <H1>{i.name}</H1>
+            <ul style={{padding:'0'}}> {
+                tours.filter(i => tour === i._id).map(i =>{
+
+                    console.log('i.text', i.text)
+                    return <Fragment>
+                    <H3 className='browser-default'>{i.name}</H3>
                     <Div>
                         <ButtonContainer style={{ justifyContent: 'flex-start'}}>
                             <Button onClick={props.history.goBack}><Emoji symbol='⬅️' label='button'/>
@@ -49,117 +47,118 @@ const Tour = (props) => {
                     <ZakazButton/>
                     <ModalZakaz/>
                     <Content>
-                        <CarouselReactSlickFade pic={i.img}/>
-                        {i.text && <ContentText>
-                            <p>{i.text}</p>
-                        </ContentText>
-                        }
-                
-                        <Discription>
-                            <Conditions>
-                            <h5>Дополнительные условия</h5>
-                            <ul>
-                            {i.duration && (
-                                <P>
-                                Продолжительность экскурсии:
-                                <li>
-                                {i.duration}
-                                </li>
-                                </P>
-                            )}
-                            {i.start && (
-                                <P>
-                                Время начала экскурсии:
-                                <li>
-                                {i.start}
-                                </li>
-                                </P>
-                            )}
-                            {i.location && (
-                                <P>
-                                Место встречи:
-                                <li>
-                                {i.location}
-                                </li>
-                                </P>
-                            )}
-                            {i.necessary && (
-                                <P>
-                                Необходимо иметь при себе:
-                                <li>
-                                {i.necessary}
-                                </li>
-                                </P>
-                            )}
-                            {i.language && (
-                                <P>
-                                Язык: 
-                                <li>
-                                {i.language}
-                                </li>
-                                </P>
-                            )}
-                            </ul>
-                            </Conditions>
-                            <CostTerms>
-                            <h5>Стоимость</h5>
-                            <ul>
-                            {i.cost1 && (
-                                <P>
-                                Цена за 1-3 чел:
-                                <li>
-                                {i.cost1}
-                                </li>
-                                </P>
-                            )}
-                            {i.cost2 && (
-                                <P>
-                                Цена за 4-7 чел:
-                                <li>
-                                {i.cost2}
-                                </li>
-                                </P>
-                            )}
-                            {i.cost3 && (
-                                <P>
-                                Цена за 8-15 чел:
-                                <li>
-                                {i.cost3}
-                                </li>
-                                </P>
-                            )}
-                            {i.cost4 && (
-                                <P>
-                                Цена за 16 и более чел:
-                                <li>
-                                {i.cost4}
-                                </li>
-                                </P>
-                            )}
-                            </ul>
-                            {i.included && (
-                                <P>
-                                Включено в стоимость:
-                                <li>
-                                {i.included}
-                                </li>
-                                </P>
-                            )}
-                            {i.unincluded && (
-                                <P>
-                                Не включено в стоимость экскурсии:
-                                <li>
-                                {i.unincluded}
-                                </li>
-                                </P>
-                            )}
-                            </CostTerms>
-                        </Discription> 
+                    <CarouselReactSlickFade pic={i.img}/>
+                    {i.text && <ContentText>
+                        <Text style={{whiteSpace: 'pre-wrap'}}>{`${i.text}`}</Text>
+                    </ContentText>
+                    }
+                    
+                    <Discription>
+                        <Conditions>
+                        <h5>Дополнительные условия</h5>
+                        <ul>
+                        {i.duration && (
+                            <P>
+                            Продолжительность экскурсии:
+                            <li>
+                            {i.duration}
+                            </li>
+                            </P>
+                        )}
+                        {i.start && (
+                            <P>
+                            Время начала экскурсии:
+                            <li>
+                            {i.start}
+                            </li>
+                            </P>
+                        )}
+                        {i.location && (
+                            <P>
+                            Место встречи:
+                            <li>
+                            {i.location}
+                            </li>
+                            </P>
+                        )}
+                        {i.necessary && (
+                            <P>
+                            Необходимо иметь при себе:
+                            <li>
+                            {i.necessary}
+                            </li>
+                            </P>
+                        )}
+                        {i.language && (
+                            <P>
+                            Язык: 
+                            <li>
+                            {i.language}
+                            </li>
+                            </P>
+                        )}
+                        </ul>
+                        </Conditions>
+                        <CostTerms>
+                        <h5>Стоимость</h5>
+                        <ul>
+                        {i.cost1 && (
+                            <P>
+                            Цена за 1-3 чел:
+                            <li>
+                            {i.cost1}
+                            </li>
+                            </P>
+                        )}
+                        {i.cost2 && (
+                            <P>
+                            Цена за 4-7 чел:
+                            <li>
+                            {i.cost2}
+                            </li>
+                            </P>
+                        )}
+                        {i.cost3 && (
+                            <P>
+                            Цена за 8-15 чел:
+                            <li>
+                            {i.cost3}
+                            </li>
+                            </P>
+                        )}
+                        {i.cost4 && (
+                            <P>
+                            Цена за 16 и более чел:
+                            <li>
+                            {i.cost4}
+                            </li>
+                            </P>
+                        )}
+                        </ul>
+                        {i.included && (
+                            <P>
+                            Включено в стоимость:
+                            <li>
+                            {i.included}
+                            </li>
+                            </P>
+                        )}
+                        {i.unincluded && (
+                            <P>
+                            Не включено в стоимость экскурсии:
+                            <li>
+                            {i.unincluded}
+                            </li>
+                            </P>
+                        )}
+                        </CostTerms>
+                    </Discription> 
                     </Content>
                     </Fragment>
-                ))
+                    
+                })
             }
-            </Fragment>
+            </ul>
         ):(
             <Spinner/>
         )}
@@ -185,9 +184,9 @@ const Tour = (props) => {
             min-width: 100%;
         }
     `
-    const H1=styled.h1`
-        color:#919aaf;
-        font-size:24px;
+    const H3=styled.h3`
+        color:#6e778c;
+        font-size: 1.5rem;
         text-align:center;
         margin: 150px 40px 20px 40px;
         padding: 0 2rem 0 2rem;
@@ -196,7 +195,6 @@ const Tour = (props) => {
         @media (min-width: 600px) {
             font-size:36px;
             padding:0 2rem 0 2rem;
-            font-size:36px;
             border-radius: 10px;
             filter: drop-shadow(1px 1px 1px black);
         }
@@ -206,10 +204,6 @@ const Tour = (props) => {
         @media (min-width: 1480px) {
             font-size:62px;
         }
-    /*     
-    @media (min-width: 1800px)and(min-height:1020px) {
-        /* padding:0 2rem 0 2rem; */
-    } */
 `
     const Content = styled.div`
         display: grid;
@@ -282,7 +276,6 @@ const Tour = (props) => {
     `
     const ContentText= styled.div`
         display: grid;
-        margin-top: 6rem;
         align-items: center;
         text-align: start;
         padding: 20px 40px;
@@ -290,6 +283,7 @@ const Tour = (props) => {
          @media (min-width: 1024px) {
             font-size: 1.4rem;
             width: 980px;
+            margin-top: 6rem;
         }
         @media (min-width: 1400px) {
             width: 1200px;
@@ -340,10 +334,19 @@ const Tour = (props) => {
             text-align:start;
             padding-left:30px;
             list-style:none;
-            /* font-style: italic; */
             font-weight: 300;
         }
     `
-
+const Text = styled.p`
+    white-space: pre-wrap;
+    font-family: Courier New, monospace;
+    font-size: 1.2rem;
+    @media (min-width: 600px) {
+            font-size: 1.4rem;
+    }
+    @media (min-width: 1200px) {
+        font-size: 1.6rem;
+    }
+`
 
 export default withRouter(Tour);

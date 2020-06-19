@@ -23,11 +23,11 @@ import Bottom from './components/layout/footer/Bottom';
 import Login from './components/auth/Login';
 import Alerts from './components/layout/Alerts';
 import Register from './components/auth/Register';
-import PrivetRoute from './components/routing/PrivetRoute'
+import PrivetRoute from './components/routing/PrivetRoute';
 
-import TourState from './context/tour/TourState'
-import AuthState from './context/auth/AuthState'
-import AlertState from './context/alert/AlertState'
+import TourState from './context/tour/TourState';
+import AuthState from './context/auth/AuthState';
+import AlertState from './context/alert/AlertState';
 import setAuthToken from './utils/setAuthToken';
 const App = () => {
   

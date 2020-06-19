@@ -16,6 +16,7 @@ const SearchBar = () => {
   });
 
   const onChange = e => {
+    e.preventDefault();
     if (text.current.value !== '') {
       filterTours(e.target.value);
     } else {
@@ -27,7 +28,7 @@ const SearchBar = () => {
                         <input
                             id="search"
                             type="search"
-                            placeholder="🔎 поиск экскурсии..."
+                            placeholder="     поиск экскурсии..."
                             style={{borderBottom:'1px ,solid #ffffff', borderRadius: '5px', backgroundColor: '#ffffff',margin:'0',height:'100%' }}
                             ref={text}
                             onChange={onChange}

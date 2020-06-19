@@ -1,11 +1,14 @@
-import React, { useContext, useEffect, Fragment } from 'react';
+import React, { useContext, useEffect, Fragment, useState } from 'react';
 import {Link} from 'react-router-dom';
 import styled from 'styled-components';
+
+import youtube from '../../utils/youtube';
+import {Key} from '../../utils/Key';
 
 import TourContext from '../../context/tour/tourContext';
 import "materialize-css/dist/css/materialize.min.css";
 import "materialize-css/dist/js/materialize.min.js";
-import M from 'materialize-css/dist/js/materialize.min.js';
+import M, { Carousel } from 'materialize-css/dist/js/materialize.min.js';
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
 
 import Spinner from '../layout/Spinner';
@@ -14,19 +17,54 @@ import ZakazButton from '../layout/button/ZakazButton';
 import ModalZakaz from '../layout/button/ModalZakaz'
 import Footer from '../layout/footer/Footer';
 import H2 from '../layout/style/H2Text';
-
+import YouTube from '../layout/youtube/YouTube'
+import CarouselYouTube from '../layout/carousel/CarouselFullScreen'
 
 const MainContainer = (props) => {
+    const [videos, setVideos] = useState([]);
+    const [selectedVideo, setSelectedVideo] = useState(null);
+    const [searchTerm, setSearchTerm] = useState('Прага');
     const tourContext = useContext(TourContext);
-
     const { tours, filtered, getTours, loading } = tourContext;
 
     useEffect(() => {
         M.AutoInit();
         getTours();
+        handleSubmit(searchTerm);
         // eslint-disable-next-line
       }, []);
+      
+      //youtube
+      const handleSubmit = async (searchTerm) => {
+        const response = await youtube.get('search', {  
+            params: {
+                part: 'snippet',
+                maxResults: 50,
+                key: 'AIzaSyB2wT_CbrmLhTTb-Cn8dEBuH_xoOkjAABg',
+                q:searchTerm,
+                order:'viewCount',
+                pageToken:'CAoQAA',
+                pageInfo: {
+                    totalResults: 50,
+                    resultsPerPage: 15
+                  },
+                type:'video',
+            }
+        });
+        
+        console.log(response.data.items);
+
+        setVideos(response.data.items);
+        setSelectedVideo(response.data.items[0]);
+    }
+    const onVideoSelect = (video) => {
+        setSelectedVideo(video);
+    }
     // console.log({tours})
+    const random=(list)=> {
+        return list[Math.floor((Math.random()*list.length))];
+    }
+
     return (
         
         <Container >
@@ -43,7 +81,10 @@ const MainContainer = (props) => {
                                     <Li key={_id}>
                                         <H3>{name}</H3>
                                         <ImageContainerFilter>
-                                            <Img src={img}/>
+                                        {(img !== null && img.length!==null && img!==undefined)?(
+                                            <Img src={random(img).path.replace(/^\.\.\/client\/public/, '')}/>
+                                        ):(<Img src='/images/czech.jpeg'/>)
+                                        }
                                         </ImageContainerFilter>
                                         <Div>
                                             <Text>{text.slice(0, 100)}
@@ -78,11 +119,11 @@ const MainContainer = (props) => {
                             </Section>
                             <Section>
                                 <Link to='/europeTour'><H2>Экскурсии по Европе</H2></Link>
-                                <ImageContainer><Img src="/images/veinAndTransfer/belvedere-1601372.jpg" alt="europe"/></ImageContainer>
+                                <ImageContainer><Img src="/images/belvedere-1601372.jpg" alt="europe"/></ImageContainer>
                             </Section>
                             <Section>
-                                <Link to='/transfer'><H2>Трансфер</H2></Link>
-                                <ImageContainer><Img src="/images/veinAndTransfer/mercedes-maybach-s-class-4k-2018-cars-w222-road.jpg" alt="transfer"/></ImageContainer>
+                                <Link to='/transfer'><H2>Услуги</H2></Link>
+                                <ImageContainer><Img src="/images/mercedes-maybach-s-class.jpg" alt="transfer"/></ImageContainer>
                             </Section>
                         </ContentContainer>
                     </Fragment>
@@ -91,6 +132,7 @@ const MainContainer = (props) => {
                          ) : (
                 <Spinner />
               )}
+              <CarouselYouTube videos={videos}/>
             <Footer/>
         </Container>
     )
@@ -102,7 +144,8 @@ const Container = styled.div`
     margin: 0;
     width: 100%;
     height:100%;
-    /* min-width: 980px; */
+    align-content: baseline;
+    justify-content: center;
     min-height:100vh;
     overflow: hidden;
     background-color: #ffffff;
@@ -206,15 +249,28 @@ const ImageContainer=styled.div`
         }
     `
     const H3=styled.h3`
-        font-size: 1.8rem;
-        line-height: 110%;
-        margin: 40px;
-        height: 70px;
+       color:#919aaf;
+        font-size:1.3;
+        text-align:center;
+        margin: 150px 40px 20px 40px;
+        padding: 0 2rem;
+        margin-bottom:1.5rem;
+        font-weight:bold;
         @media (min-width: 600px) {
-        font-size: 2rem;
+            font-size:36px;
+            font-size:2rem;
+            border-radius: 10px;
+            filter: drop-shadow(1px 1px 1px black);
+        }
+        /* @media (min-width: 1024px) {
+            font-size:48px;
+        } */
+        @media (min-width: 1480px) {
+            font-size:2.4rem;
         }
     `
     const Text=styled.p`
+        font-family: Courier New, monospace;
         font-size:1.4rem;
         display:flex;
         flex-direction:column;
