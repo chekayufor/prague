@@ -12,7 +12,7 @@ const CarouselReactSlickFade = ({pic}) => {
         cssEase: 'linear',
         infinity: true,
         autoplay:true,
-        autoplaySpeed:3000,
+        autoplaySpeed:2000,
         responsive:[
             {
                 breakpoint:480,
@@ -25,11 +25,13 @@ const CarouselReactSlickFade = ({pic}) => {
     return (
         <SlideContainer>
             <Slider className='fade' {...settings}>
-            {pic && pic.map((i , index)=>(
+            {(pic && pic.length)? (pic.map((i , index)=>(
                 <Slide data-index={index} key={index}>
                     <Image src={i.path.replace(/^\.\.\/client\/public/, '')} alt={i.filename} />
                 </Slide>           
-            ))} 
+            ))):(
+                (<Image src='/images/welcome.jpeg' />)
+            )} 
             </Slider>
         </SlideContainer>
     )

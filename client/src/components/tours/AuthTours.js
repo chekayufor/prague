@@ -1,4 +1,5 @@
 import React, { Fragment, useContext, useEffect } from 'react';
+import styled from 'styled-components'
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
 import AuthTour from './AuthTour';
 import Spinner from '../layout/Spinner';
@@ -19,7 +20,7 @@ const AuthTours = () => {
   }
 
   return (
-    <Fragment>
+    <Container>
       {tours !== null && !loading ? (
         <TransitionGroup>
           {filtered !== null
@@ -45,8 +46,11 @@ const AuthTours = () => {
       ) : (
         <Spinner />
       )}
-    </Fragment>
+    </Container>
   );
 };
-
+const Container=styled.div`
+ overflow: scroll;
+    max-height:1800px;
+`
 export default AuthTours;

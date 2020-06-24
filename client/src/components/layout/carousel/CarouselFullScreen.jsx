@@ -1,4 +1,4 @@
-import React, { useEffect, useState, Fragment } from "react";
+import React, { useState, Fragment } from "react";
 import styled from "styled-components";
 import YouTubeVideo from '../youtube/YouTubeVideo';
 import H2 from '../style/H2Text';

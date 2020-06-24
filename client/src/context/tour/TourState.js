@@ -197,14 +197,15 @@ const TourState = props => {
   };
 
   // Delete Pictures
-  const deletePicture = async filename => {
+  const deletePicture = async (filename, index) => {
     console.log({filename});
+    console.log({index});
     try {
       await axios.delete(`/upload/${filename}`);
 
       dispatch({
         type: DELETE_PICTURE,
-        payload: filename
+        payload: index
       });
     } catch (err) {
       dispatch({

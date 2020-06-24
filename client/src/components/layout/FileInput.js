@@ -1,13 +1,12 @@
-import React, {useRef, useState, useContext } from 'react';
+import React, {useRef, useContext } from 'react';
 import styled from 'styled-components';
 import TourContext from '../../context/tour/tourContext';
 import Resizer from 'react-image-file-resizer';
 
 
-const FileInput = ({pic, setPic}) => {
-const [selectedFile, setSelectedFile] = useState(null);
+const FileInput = () => {
 const tourContext = useContext(TourContext);
-const { addPicture, loading, pictures } = tourContext;
+const { addPicture, pictures } = tourContext;
     const fileInput = useRef();
 
     const FileSelect = (e) => {
@@ -32,8 +31,7 @@ const { addPicture, loading, pictures } = tourContext;
             );
             addPicture(fileInput.current.files[0]);
         }
-        console.log({pictures})
-        // setPic([...pic, fileInput.current.files[0]]);
+        console.log({pictures});
     }
 
       return (
@@ -74,20 +72,5 @@ const Input=styled.input`
     border-radius: 5px;
 `
 
-const Button =styled.button`
-    display:flex;
-    font-size:16px;
-    cursor: pointer !Important;
-    background:red;
-    color: #fff;
-    justify-content: center;
-    text-align: center;
-    height: 35px;
-    align-items: flex-end;
-    align-self: flex-end;
-    border-radius: 5px;
-    padding: 5px 12px;
-
-`  
 export default FileInput;
   

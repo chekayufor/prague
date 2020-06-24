@@ -8,7 +8,7 @@ import {Key} from '../../utils/Key';
 import TourContext from '../../context/tour/tourContext';
 import "materialize-css/dist/css/materialize.min.css";
 import "materialize-css/dist/js/materialize.min.js";
-import M, { Carousel } from 'materialize-css/dist/js/materialize.min.js';
+import M from 'materialize-css/dist/js/materialize.min.js';
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
 
 import Spinner from '../layout/Spinner';
@@ -17,7 +17,6 @@ import ZakazButton from '../layout/button/ZakazButton';
 import ModalZakaz from '../layout/button/ModalZakaz'
 import Footer from '../layout/footer/Footer';
 import H2 from '../layout/style/H2Text';
-import YouTube from '../layout/youtube/YouTube'
 import CarouselYouTube from '../layout/carousel/CarouselFullScreen'
 
 const MainContainer = (props) => {
@@ -40,7 +39,8 @@ const MainContainer = (props) => {
             params: {
                 part: 'snippet',
                 maxResults: 50,
-                key: 'AIzaSyB2wT_CbrmLhTTb-Cn8dEBuH_xoOkjAABg',
+                // key: 'AIzaSyB2wT_CbrmLhTTb-Cn8dEBuH_xoOkjAABg',
+                key: Key,
                 q:searchTerm,
                 order:'viewCount',
                 pageToken:'CAoQAA',
@@ -57,9 +57,9 @@ const MainContainer = (props) => {
         setVideos(response.data.items);
         setSelectedVideo(response.data.items[0]);
     }
-    const onVideoSelect = (video) => {
-        setSelectedVideo(video);
-    }
+    // const onVideoSelect = (video) => {
+    //     setSelectedVideo(video);
+    // }
     // console.log({tours})
     const random=(list)=> {
         return list[Math.floor((Math.random()*list.length))];
@@ -81,9 +81,9 @@ const MainContainer = (props) => {
                                     <Li key={_id}>
                                         <H3>{name}</H3>
                                         <ImageContainerFilter>
-                                        {(img !== null && img.length!==null && img!==undefined)?(
+                                        {(img && img.length)?(
                                             <Img src={random(img).path.replace(/^\.\.\/client\/public/, '')}/>
-                                        ):(<Img src='/images/czech.jpeg'/>)
+                                        ):(<Img src='/images/welcome.jpeg'/>)
                                         }
                                         </ImageContainerFilter>
                                         <Div>

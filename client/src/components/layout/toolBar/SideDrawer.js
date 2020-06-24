@@ -50,7 +50,7 @@ const SideDrawer = (props) => {
                     e.preventDefault();
                     props.backdropClickHandler();
                   }}
-          >🔎</button>
+          ><span role="img">🔎</span></button>
         </div>
         <ul onClick={props.backdropClickHandler}>
           {

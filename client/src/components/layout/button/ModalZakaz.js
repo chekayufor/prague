@@ -1,7 +1,7 @@
-import React, {useState, useEffect, useContext} from 'react';
+import React, {useState, useEffect} from 'react';
 import styled from 'styled-components';
 import axios from 'axios';
-import AlertContext from '../../../context/alert/alertContext';
+// import AlertContext from '../../../context/alert/alertContext';
 
 
 import DatePicker from 'react-datepicker';
@@ -17,8 +17,8 @@ const ModalZakaz = () => {
     const[date, setDate]=useState('')
     const[text, setText]=useState('')
 
-    const alertContext = useContext(AlertContext);
-    const { setAlert } = alertContext;
+    // const alertContext = useContext(AlertContext);
+    // const { setAlert } = alertContext;
 
     useEffect(() => {
         M.AutoInit();

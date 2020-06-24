@@ -1,5 +1,5 @@
-import React, {Fragment, useContext} from 'react';
-import {Link, useRouteMatch} from 'react-router-dom';
+import React, { useContext } from 'react';
+import { Link } from 'react-router-dom';
 import TourContext from '../../context/tour/tourContext';
 import styled from 'styled-components';
 
@@ -7,67 +7,73 @@ import Spinner from '../layout/Spinner';
 
 
 const Tours = (props) => {
-    const tourContext=useContext(TourContext);
-    const {loading, filtered, tours} = tourContext;
-    console.log({props})
-    
-    let { url } = useRouteMatch();
+    const tourContext = useContext(TourContext);
+    const { loading, filtered } = tourContext;
+    console.log({ props })
 
-const random=(list)=> {
-    return list[Math.floor((Math.random()*list.length))];
-}
+    // let { url } = useRouteMatch(); //'react-router-dom'
+
+    const random = (list) => {
+        const index = Math.floor((Math.random() * list.length));
+        return list[index];
+    }
+    
     return (
-        <Ul style={{padding:'0'}}>
+        <Ul style={{ padding: '0' }}>
             {props.tours !== null && !loading ? (
-                   (filtered !== null ) ? (
-                        filtered.map(({_id, name, section,text, img, cost,start,duration,included,unincluded,necessary,location,language,type,date}) =>(
-                            <Li key={_id} style={{padding:'0'}}>
+                (filtered !== null) ? (
+                    filtered.map(({ _id, name, section, text, img, cost, start, duration, included, unincluded, necessary, location, language, type, date }) => (
+                        <Li key={_id} style={{ padding: '0' }}>
+                            <H5 >{name}</H5>
+                            <ImageContainer>
+                                {(img && img.length) ? (
+                                    <Img src={random(img).path.replace(/^\.\.\/client\/public/, '')} />
+                                ) : (<Img src='/images/welcome.jpeg' />)
+                                }
+                            </ImageContainer>
+                            <Div>
+                                <Text>{text.slice(0, 160)}
+                                    <Link to={`/tours/${_id}`}
+                                        style={{
+                                            alignItems: 'center',
+                                            display: 'flex', fontWeight: 'bold', justifyContent: 'center'
+                                        }}>
+                                        <Span>...</Span>
+                                    </Link>
+                                </Text>
+                            </Div>
+                        </Li>
+                    ))) : (
+                        props.tours && props.tours.sort(function(a, b){return 0.5 - Math.random()}).map(({ _id, name, section, text, img, cost, start, duration, included, unincluded, necessary, location, language, type, date }) => (
+                            <Li key={_id} style={{ padding: '0' }} >
                                 <H5 >{name}</H5>
                                 <ImageContainer>
-                                {(img !== null && img.length!==null && img!==undefined)?(
-                                    <Img src={random(img).path.replace(/^\.\.\/client\/public/, '')}/>
-                                ):(<Img src='/images/czech.jpeg'/>)
-                                }
+                                    {(img && img.length) ? (
+                                        <Img src={random(img).path.replace(/^\.\.\/client\/public/, '')} />
+                                    ) : (<Img src='/images/welcome.jpeg' />)
+                                    }
                                 </ImageContainer>
                                 <Div>
                                     <Text>{text.slice(0, 160)}
-                                    <Link  to={`/tours/${_id}`}
-                                     style={{alignItems: 'center',
-                                        display: 'flex', fontWeight:'bold',    justifyContent: 'center'}}>
-                                        <Span>...</Span>
-                                    </Link> 
-                                    </Text>  
+                                        <Link to={`/tours/${_id}`}
+                                            style={{
+                                                alignItems: 'center',
+                                                display: 'flex', fontWeight: 'bold', justifyContent: 'center'
+                                            }}>
+                                            <Span>...</Span>
+                                        </Link>
+                                    </Text>
                                 </Div>
                             </Li>
-                        ))):(
-                            props.tours && props.tours.map(({_id, name, section,text, img, cost,start,duration,included,unincluded,necessary,location,language,type,date}) =>(
-                            <Li key={_id} style={{padding:'0'}} >
-                                <H5 >{name}</H5>
-                                <ImageContainer>
-                                {(img && img !== null && img.length!==null && img!==undefined )?(
-                                    <Img src={random(img).path.replace(/^\.\.\/client\/public/, '')}/>
-                                ):(<Img src='/images/czech.jpeg'/>)
-                                }
-                                </ImageContainer>
-                                <Div>
-                                    <Text>{text.slice(0, 160)}
-                                    <Link  to={`/tours/${_id}`}
-                                    style={{alignItems: 'center',
-                                        display: 'flex', fontWeight:'bold',    justifyContent: 'center'}}>
-                                        <Span>...</Span>
-                                    </Link> 
-                                    </Text>  
-                                </Div>
-                        </Li>
-                    )))
-                                ):(
-                    <Spinner/>
+                        )))
+            ) : (
+                    <Spinner />
                 )
             }
-        </Ul>           
+        </Ul>
     )
 }
-    const Ul=styled.ul`
+const Ul = styled.ul`
        display:grid;
        padding: 0;
         margin:0;
@@ -78,7 +84,7 @@ const random=(list)=> {
             grid-template-columns:1fr 1fr 1fr;
         }
     `
-    const Li=styled.li`
+const Li = styled.li`
         display:grid;
         justify-content:center;
         justify-items: center;
@@ -86,11 +92,11 @@ const random=(list)=> {
             grid-template-rows: 0.5fr 1.5fr 0.8fr;
         }
     `
-    const Div= styled.div`
+const Div = styled.div`
         display:grid;
         padding: 20px 40px;
     `
-    const H5=styled.h5`
+const H5 = styled.h5`
         color:#919aaf;
         font-size:1.3;
         text-align:center;
@@ -107,7 +113,7 @@ const random=(list)=> {
             font-size:2.4rem;
         }
     `
-    const Text=styled.p`
+const Text = styled.p`
         font-family: Courier New, monospace;
         font-size:1.4rem;
         display:flex;
@@ -117,7 +123,7 @@ const random=(list)=> {
         font-size: 1.6rem;
         }
     `
-    const Span = styled.span`
+const Span = styled.span`
         display: flex;
         text-align:center;
         align-items:center;
@@ -126,7 +132,7 @@ const random=(list)=> {
         justify-content: center;
 
     `
-    const ImageContainer=styled.div`
+const ImageContainer = styled.div`
         height: 320px;
         width:80%;
         cursor: pointer;
@@ -142,7 +148,7 @@ const random=(list)=> {
             height:420px;
         }
     `
-    const Img = styled.img`
+const Img = styled.img`
         width:100%;
         height:100%;
         object-fit: cover;

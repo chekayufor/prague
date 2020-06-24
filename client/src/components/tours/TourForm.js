@@ -1,10 +1,11 @@
-import React, { useState, useContext, useEffect, useRef } from 'react';
+import React, { useState, useContext, useEffect} from 'react';
+import axios from 'axios';
 import styled from 'styled-components';
 import TourContext from '../../context/tour/tourContext';
 import ResizableTextarea from '../layout/ResizableTextarea';
 import FileInput from '../layout/FileInput'
 // import InputCost from '../layout/InputCost';
-import Emoji from '../layout/Emoji'
+// import Emoji from '../layout/Emoji'
 
 const TourForm = () => {
     const [pic, setPic] = useState([]);
@@ -29,9 +30,9 @@ const TourForm = () => {
   // const pictureRef = useRef(null);
 
     const tourContext = useContext(TourContext);
-    const { addTour, updateTour, clearCurrent, current, pictures, loading, deletePicture, setPictures } = tourContext;
+    const { addTour, updateTour, clearCurrent, current, pictures, setPictures } = tourContext;
 
-    console.log({pictures})
+    // console.log({pictures})
 
   useEffect(() => {
     if (current !== null) {
@@ -84,13 +85,25 @@ const TourForm = () => {
       start:''
     })
   };
-
-  const deleteItem = index => {
-    const newInventory = pictures.filter(
-      (item, itemIndex) => index !== itemIndex
-    );
-    return setPictures([...newInventory]);
+  const deletePic = async (filename, index) => {
+    console.log({filename});
+    console.log({index});
+    try {
+      const newInventory = pictures.filter(
+        (item, itemIndex) => index !== itemIndex
+      );
+      setPictures([...newInventory]);
+      await axios.delete(`/upload/${filename}`);
+    } catch (err) {
+      console.log(err)
+    }
   };
+  // const deleteItem = index => {
+  //   const newInventory = pictures.filter(
+  //     (item, itemIndex) => index !== itemIndex
+  //   );
+  //   return setPictures([...newInventory]);
+  // };
 
   return (
     <FormContainer onSubmit={onSubmit}>
@@ -318,21 +331,21 @@ const TourForm = () => {
             checked={type === 'transfer'}
             onChange={onChange}
           />
-          <span>Трансфер</span>
+          <span>Услуги</span>
         </label>
       </p>
 
       <FileInput pic={pic} setPic={setPic}/>
       <div>
         <ul>
-          {pictures && pictures !== null && pictures.length!== 0? (pictures.map((i, index) => (
+          {(pictures && pictures.length) ? (pictures.map((i, index) => (
               <PicContainer key={index} >
                   <img width='auto' height='150' alt={i.filename} src={i.path.replace(/^\.\.\/client\/public/, '')}/>
                   <p>{i.filename}</p>
                  <DeleteButton onClick={e => {
                     e.preventDefault();
-                    deleteItem(index);
-                    // deletePicture(i.filename)
+                    // deleteItem(index);
+                    deletePic(i.filename, index)
                   }}>
                     X
                     </DeleteButton>

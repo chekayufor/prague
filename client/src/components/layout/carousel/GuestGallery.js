@@ -4,6 +4,7 @@ import CarouselReactSlick from './CarouselReactSlick';
 // import * as images from '/images/guests';
 
 const GuestGallery = () => {
+    
     function importAll(r) {
         return r.keys().map(r);
     }

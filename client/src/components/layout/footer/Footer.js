@@ -5,7 +5,6 @@ import styled from 'styled-components';
 import GuestGallery from '../carousel/GuestGallery';
 import Sociall from '../Sociall';
 import About from './About';
-import H2 from '../style/H2Text'
 
 
 const Footer = () => {

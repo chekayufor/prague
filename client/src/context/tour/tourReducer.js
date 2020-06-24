@@ -69,7 +69,8 @@ import {
         return {
           ...state,
           pictures: state.pictures.filter(
-            picture => picture.filename !== action.payload
+            (i, itemIndex) => itemIndex !== action.payload 
+            // i => i.filename !== action.payload
           ),
           loading: false
         };

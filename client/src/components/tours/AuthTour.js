@@ -24,7 +24,8 @@ const AuthTour = ({ tour }) => {
     <Container ref={refContainer}>
       <h3 style={{fontSize:'1.4rem', textAlign:'start'}}>
         {name}
-        {!open &&<Button onClick={onOpen}><Emoji symbol='✅' label="button"/></Button>}
+        {(!open) ? (<Button style={{background:'none'}} onClick={onOpen}><Emoji symbol='✅' label="button"/></Button>) : (<Button style={{background:'none'}} onClick={onOpen}><Emoji symbol='❎' label='button'/></Button>)
+      }
       </h3>
       {open && <div>
           <Ul>
@@ -147,7 +148,6 @@ const AuthTour = ({ tour }) => {
               </ul>)  
           )}
           </Ul>
-          <Button onClick={onOpen}><Emoji symbol='❎' label='button'/></Button>
         </div>
         }
       <p>
@@ -177,8 +177,13 @@ const Button = styled.button`
   transition: all .4s;
   font-size:1.2rem;
   cursor: pointer;
+  background-color:none;
+  &&:focus {
+    outline: none;
+    background-color: none;
+  }
 `
-const Ul=styled.ul`
+const Ul = styled.ul`
 li{
   font-weight:normal;
 }

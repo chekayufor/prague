@@ -256,24 +256,24 @@ const Tour = (props) => {
             font-size: 1.6rem;
         }
     `
-    const ButtonZakaz = styled.button`
-        height: 50px;
-        width: 150px;
-        text-transform:uppercase;
-        font-size: medium;
-        position: fixed;
-        background: rgba(243, 21, 4, 0.74);
-        color:white;
-        border-radius:7px;
-        border: solid 1px #919aaf;
-        z-index: 900;
-        @media (min-width: 1024px) {
-            font-size: 1.4rem;
-        }
-        @media (min-width: 1400px) {
-            font-size: 1.6rem;
-        }
-    `
+    // const ButtonZakaz = styled.button`
+    //     height: 50px;
+    //     width: 150px;
+    //     text-transform:uppercase;
+    //     font-size: medium;
+    //     position: fixed;
+    //     background: rgba(243, 21, 4, 0.74);
+    //     color:white;
+    //     border-radius:7px;
+    //     border: solid 1px #919aaf;
+    //     z-index: 900;
+    //     @media (min-width: 1024px) {
+    //         font-size: 1.4rem;
+    //     }
+    //     @media (min-width: 1400px) {
+    //         font-size: 1.6rem;
+    //     }
+    // `
     const ContentText= styled.div`
         display: grid;
         align-items: center;

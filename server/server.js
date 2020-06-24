@@ -1,5 +1,5 @@
 const express = require('express');
-require ('dotenv').config();
+require('dotenv').config();
 const moment = require('moment');
 
 var multer = require('multer');
@@ -8,6 +8,7 @@ var multer = require('multer');
 // resizer
 var cors = require('cors');
 const fs = require('fs').promises;
+const uploadPath = '../client/public/upload';
 
 const connectDB = require('./config/db');
 const nodemailer = require('nodemailer');
@@ -34,18 +35,18 @@ app.use('/api/auth', require('./routes/auth'));
 app.use('/api/excursion', require('./routes/excursion'));
 // app.use('/api/send', require('./routes/send'));
 //data parsing
-app.use(express.urlencoded({extended:false}));
+app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 
 
 //sending email
 app.post('/api/send', (req, res) => {
-    const {name, tel, email, data, text} = req.body;
+    const { name, tel, email, data, text } = req.body;
 
     const output = `
             <p>You have a new contact request from PragueTour</p>
             <h3>Contact Details</h3>
-            <ul>  
+            <li>  
             <li>Name: ${name}</li>
             <li>Phone: ${tel}</li>
             <li>Email: ${email}</li>
@@ -57,16 +58,16 @@ app.post('/api/send', (req, res) => {
     let transporter = nodemailer.createTransport({
         host: 'gmail',
         port: 587,
-        service:'gmail',
+        service: 'gmail',
         secure: false, // true for 465, false for other ports
         auth: {
-          user:process.env.EMAIL , // generated ethereal user
-          pass: process.env.PASSWORD  // generated ethereal password
+            user: process.env.EMAIL, // generated ethereal user
+            pass: process.env.PASSWORD  // generated ethereal password
         },
         //localhost
-      tls:{
-        rejectUnauthorized:false
-      }
+        tls: {
+            rejectUnauthorized: false
+        }
     });
     // setup email data with unicode symbols
     let mailOptions = {
@@ -75,30 +76,30 @@ app.post('/api/send', (req, res) => {
         subject: 'Node Contact Request', // Subject line
         text: 'Hello world?', // plain text body
         html: output // html body
-    }; 
+    };
     // send mail with defined transport object
     transporter.sendMail(mailOptions, (error, info) => {
 
         if (error) {
             console.log(error);
-        }else{
+        } else {
             // console.log('Message sent: %s', info.messageId);   
-            console.log('_____________Message sent____________');   
+            console.log('_____________Message sent____________');
         }
-  
-        });
+
+    });
     console.log('DATA', req.body);
-    res.json({message: 'Message received!'})
+    res.json({ message: 'Message received!' })
 });
 
 //uploading pictures
 var storage = multer.diskStorage({
     destination: function (req, file, cb) {
-    cb(null, '../client/public/upload')
-  },
-  filename: function (req, file, cb) {
-    cb(null, Date.now() + '-' +file.originalname )
-  }
+        cb(null, uploadPath)
+    },
+    filename: function (req, file, cb) {
+        cb(null, Date.now() + '-' + file.originalname)
+    }
 });
 //resize with multer-sharp
 // var storage = multer.gcsSharp({
@@ -116,46 +117,53 @@ var storage = multer.diskStorage({
 
 //Create an upload instance and receive a single file
 var upload = multer({ storage: storage }).single('file');
-
+function importAll(r) {
+    return r.keys().map(r);
+}
 //Setup the POST route to upload a file
 app.post('/upload', async (req, res) => {
     // console.log('POST______________req.file', req.file);
     try {
         await upload(req, res, (err) => {
             console.log('upload______________req.file', req.file);
-               if (err instanceof multer.MulterError) {
-                   return res.status(500).json(err)
-               } else if (err) {
-                   return res.status(500).json(err)
-               }
-          return res.status(200).send(req.file)
+            if (err instanceof multer.MulterError) {
+                return res.status(500).json(err)
+            } else if (err) {
+                return res.status(500).json(err)
+            }
+            return res.status(200).send(req.file)
         })
     } catch (err) {
         console.error(err.message);
         res.status(500).send('Server Error');
     }
     console.error('POST______________res.file', res.message);
-  
+
 });
 // DELETE /upload file
 
-app.delete('/upload/:filename', async (res, req) => {
-    // console.log('delete______________req.file', req)
+app.delete('/upload/:filename', async (req, res) => {
+    const { params } = req;
+
+    if (!params.filename) {
+        res.status(400).send('bad request');
+        return;
+    }
+
     try {
-        await fs.unlink('/upload/' + req.params.filename);
-         console.log('File has been Deleted');
+        const sanitizedFilename = params.filename.replace('..', '');
+        const filePath = `${uploadPath}/${sanitizedFilename}`;
+        
+        await fs.unlink(filePath);
+        console.log('File has been Deleted');
+        res.status(200).send('ok');
 
     } catch (err) {
         console.log(err);
         res.status(500).send('Server Error');
     }
-    console.log('File has been Deleted');
-  });
+});
 
-
-app.get('/',(res, req)=>{
-    console.log('app.get', res)
-})
 
 const PORT = process.env.PORT || 5000;
 

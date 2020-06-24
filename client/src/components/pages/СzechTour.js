@@ -17,7 +17,7 @@ const getPageTours = () => {
     let arr = [];
     if(tours !== null) {
          arr = tours.filter(tour => 
-            tour.type.toString() === 'europe'
+            tour.type.toString() === 'czech'
         )
         // console.log({arr})
     }
