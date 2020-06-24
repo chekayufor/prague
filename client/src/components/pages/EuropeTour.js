@@ -26,11 +26,20 @@ const getPageTours = () => {
 }
     return (
         <Container>
-           <H2 style={{marginTop:'100px'}}>ЭКСКУРСИИ ПО ЕВРОПЕ</H2>
+           <TitleText>ЭКСКУРСИИ ПО ЕВРОПЕ</TitleText>
            <Tours tours={getPageTours()}/>
         </Container>
     )
 }
+
+const TitleText = styled(H2)`
+    margin-top:130px;
+    margin-bottom:20px;
+    @media (min-width: 1024px) {
+        margin-top: 200px;
+        margin-bottom: 80px;
+    }
+`
 const Container = styled.div`
     top: 0;
     left: 0;

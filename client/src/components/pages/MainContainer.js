@@ -52,7 +52,7 @@ const MainContainer = (props) => {
             }
         });
         
-        console.log(response.data.items);
+        // console.log(response.data.items);
 
         setVideos(response.data.items);
         setSelectedVideo(response.data.items[0]);

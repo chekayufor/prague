@@ -12,7 +12,7 @@ const Login = props => {
   // const { setAlert } = alertContext;
   const { login, error, clearErrors, isAuthenticated } = authContext;
 
-  console.log({props})
+  // console.log({props})
   useEffect(() => {
     M.AutoInit();
 

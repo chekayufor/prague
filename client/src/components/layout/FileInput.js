@@ -12,7 +12,7 @@ const { addPicture, pictures } = tourContext;
     const FileSelect = (e) => {
        let fInput = false;
         e.preventDefault();
-        console.log('fileInput.current.files[0]', fileInput.current.files[0]);
+        // console.log('fileInput.current.files[0]', fileInput.current.files[0]);
         if(fileInput.current.files[0]){
             fInput = true;
         }
@@ -31,7 +31,7 @@ const { addPicture, pictures } = tourContext;
             );
             addPicture(fileInput.current.files[0]);
         }
-        console.log({pictures});
+        // console.log({pictures});
     }
 
       return (

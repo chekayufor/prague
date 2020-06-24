@@ -1,4 +1,4 @@
-import React, { Fragment, useContext, useEffect } from 'react';
+import React, { useContext, useEffect } from 'react';
 import styled from 'styled-components'
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
 import AuthTour from './AuthTour';

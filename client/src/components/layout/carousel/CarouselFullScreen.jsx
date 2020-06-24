@@ -7,7 +7,7 @@ import H2 from '../style/H2Text';
 const CarouselFullScreen = ({videos}) => {
 
   const [index, setIndex] = useState(0);
-  console.log({videos})
+  // console.log({videos})
   let slideWidth;
   if (window.matchMedia("(max-width: 600px)").matches) {
     /* The viewport is less than, or equal to, 600 pixels wide */
@@ -18,7 +18,7 @@ const CarouselFullScreen = ({videos}) => {
   }
   
 
-    console.log({index});
+    // console.log({index});
 
     const moveRight =() => {
       let next = (index + 1) % videos.length;

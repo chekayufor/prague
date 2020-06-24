@@ -9,7 +9,7 @@ const YouTube = ({videos,onVideoSelect }) => {
         onVideoSelect()
         // eslint-disable-next-line
       }, []);
-console.log({videos})
+// console.log({videos})
     return (
         <div style={{height:'300px'}}>
         <Ul>{

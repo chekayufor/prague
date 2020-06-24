@@ -9,7 +9,7 @@ import Spinner from '../layout/Spinner';
 const Tours = (props) => {
     const tourContext = useContext(TourContext);
     const { loading, filtered } = tourContext;
-    console.log({ props })
+    // console.log({ props })
 
     // let { url } = useRouteMatch(); //'react-router-dom'
 

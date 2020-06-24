@@ -16,7 +16,7 @@ const InputCost= ({tourCost, setTourCost, cost})=> {
         e.preventDefault();
         setTourCost( {...tourCost, [e.target.name]: e.target.value} )
     }
-     console.log('Object.values(tourCost)', Object.values(tourCost))
+    //  console.log('Object.values(tourCost)', Object.values(tourCost))
   return (
     <Form >
         <label> Цена за 1-3 чел:

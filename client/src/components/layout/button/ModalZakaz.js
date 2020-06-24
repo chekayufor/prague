@@ -30,8 +30,8 @@ const ModalZakaz = () => {
 
         axios.post('/api/send', { name, tel, email, date, text })
             .then(res => {
-                console.log('Server received the message');
-                console.log('res.data', res.data);
+                // console.log('Server received the message');
+                // console.log('res.data', res.data);
                 M.toast({html: 'Ваше сообщение отправлено'});
             })
             

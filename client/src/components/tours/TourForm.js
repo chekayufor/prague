@@ -86,8 +86,8 @@ const TourForm = () => {
     })
   };
   const deletePic = async (filename, index) => {
-    console.log({filename});
-    console.log({index});
+    // console.log({filename});
+    // console.log({index});
     try {
       const newInventory = pictures.filter(
         (item, itemIndex) => index !== itemIndex

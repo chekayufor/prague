@@ -3,7 +3,7 @@ import Slider from 'react-slick'
 import styled from 'styled-components'
 
 const CarouselReactSlick = ({imgList}) => {
-    console.log({imgList})
+    // console.log({imgList})
     const settings={
         dots:false,
         infinity: true,
@@ -33,7 +33,7 @@ const CarouselReactSlick = ({imgList}) => {
     return (
         <SlideContainer>
             <Slider {...settings}>
-            {imgList && imgList.map((img, index)=>(
+            {imgList && imgList.sort(function(a, b){return 0.5 - Math.random()}).map((img, index)=>(
                 <Slide data-index={index} key={index}>
                     <A target="_blank">
                         <Image src={img} />
