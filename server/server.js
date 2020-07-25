@@ -1,8 +1,8 @@
 const express = require('express');
 require('dotenv').config();
 const moment = require('moment');
-
-var multer = require('multer');
+const path=require('path');
+var multer = require('multer');;
 // const gcsSharp = require('multer-sharp'); 
 
 // resizer
@@ -164,6 +164,15 @@ app.delete('/upload/:filename', async (req, res) => {
     }
 });
 
+//Serve static assets i poroduction
+if(process.env.NODE_ENV ==='production') {
+    //Set static folder
+    app.use(express.static('client/build'));
+
+    app.get('*', (req, res) => {
+        res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'))
+    });
+}
 
 const PORT = process.env.PORT || 5000;
 

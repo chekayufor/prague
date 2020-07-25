@@ -18,45 +18,54 @@ import ModalZakaz from '../layout/button/ModalZakaz'
 import Footer from '../layout/footer/Footer';
 import H2 from '../layout/style/H2Text';
 import CarouselYouTube from '../layout/carousel/CarouselFullScreen'
+import axios from 'axios';
 
 const MainContainer = (props) => {
     const [videos, setVideos] = useState([]);
     const [selectedVideo, setSelectedVideo] = useState(null);
-    const [searchTerm, setSearchTerm] = useState('Прага');
+    const [searchTerm, setSearchTerm] = useState('#guidedmitry');
     const tourContext = useContext(TourContext);
     const { tours, filtered, getTours, loading } = tourContext;
 
     useEffect(() => {
         M.AutoInit();
         getTours();
-        handleSubmit(searchTerm);
+        // handleSubmit(searchTerm);
+        getVideos();
         // eslint-disable-next-line
       }, []);
-      
-      //youtube
-      const handleSubmit = async (searchTerm) => {
-        const response = await youtube.get('search', {  
-            params: {
-                part: 'snippet',
-                maxResults: 50,
-                // key: 'AIzaSyB2wT_CbrmLhTTb-Cn8dEBuH_xoOkjAABg',
-                key: Key,
-                q:searchTerm,
-                order:'viewCount',
-                pageToken:'CAoQAA',
-                pageInfo: {
-                    totalResults: 50,
-                    resultsPerPage: 15
-                  },
-                type:'video',
-            }
-        });
-        
-        // console.log(response.data.items);
+      const getVideos = async ()=>{
+          const res = await axios.get(`https://www.googleapis.com/youtube/v3/search?part=id&channelId=UCMmsWAmdBLUdAEHuDmypuRQ&maxResults=50&order=date&key=${Key}`);
+          console.log(res.data.items);
 
-        setVideos(response.data.items);
-        setSelectedVideo(response.data.items[0]);
-    }
+        setVideos(res.data.items);
+        setSelectedVideo(res.data.items[0]);
+      }
+      //youtube
+    //   const handleSubmit = async (searchTerm) => {
+    //     const response = await youtube.get('search', {  
+    //         params: {
+    //             part: 'snippet',
+    //             maxResults: 50,
+    //             // key: 'AIzaSyB2wT_CbrmLhTTb-Cn8dEBuH_xoOkjAABg',
+    //             list:'UUMmsWAmdBLUdAEHuDmypuRQ',
+    //             key: Key,
+    //             q:searchTerm,
+    //             order:'viewCount',
+    //             pageToken:'CAoQAA',
+    //             pageInfo: {
+    //                 totalResults: 50,
+    //                 resultsPerPage: 15
+    //               },
+    //             type:'video',
+    //         }
+    //     });
+        
+    //     console.log(response.data.items);
+
+    //     setVideos(response.data.items);
+    //     setSelectedVideo(response.data.items[0]);
+    // }
     // const onVideoSelect = (video) => {
     //     setSelectedVideo(video);
     // }

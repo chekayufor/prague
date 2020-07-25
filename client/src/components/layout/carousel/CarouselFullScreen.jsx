@@ -18,7 +18,8 @@ const CarouselFullScreen = ({videos}) => {
   }
   
 
-    // console.log({index});
+    console.log({index});
+    console.log(videos.length);
 
     const moveRight =() => {
       let next = (index + 1) % videos.length;
@@ -38,13 +39,17 @@ const CarouselFullScreen = ({videos}) => {
       <H2>Путевые Заметки или Виртуальные Экскурсии</H2>
     </a>
     <Box>
-    <Button onClick={moveLeft} style={{marginRight: '3px'}}>Prev</Button>
+    {(index <=0)? 
+      <Button style={{marginRight: '3px'}}>Prev</Button>
+      :
+      <Button onClick={moveLeft} style={{marginRight: '3px'}}>Prev</Button>
+    }
       <Mask >
         <SlideContainer
           x={index * slideWidth}
         >
         {
-          videos.slice(0, 7).map(video=>(
+          videos.slice(0, 15).map(video=>(
               <Slide key={video.id.videoId}>
                   <YouTubeVideo video={video}/>
               </Slide>
@@ -52,7 +57,11 @@ const CarouselFullScreen = ({videos}) => {
       }
         </SlideContainer>
         </Mask>
+       {(index >= 14)?
+        <Button style={{marginLeft: '3px'}}>Next</Button>
+        :
         <Button onClick={moveRight} style={{marginLeft: '3px'}}>Next</Button>
+      }
     </Box>
     </Fragment>):(<Fragment/>)
     }
