@@ -27,7 +27,7 @@ connectDB();
 //Init Middleware && now we can accept data 
 app.use(express.json({ extended: false }))
 
-app.get('/', (rec, res) => res.json({ msg: 'Welcome to Prague' }));
+// app.get('/', (rec, res) => res.json({ msg: 'Welcome to Prague' }));
 
 // Define Routes
 app.use('/api/users', require('./routes/users'));
