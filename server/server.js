@@ -171,7 +171,7 @@ if(process.env.NODE_ENV ==='production') {
 
     app.get('*', (req, res) => {
         console.log("Current directory:", __dirname); 
-        res.sendFile(path.resolve('../client','build', 'index.html'));
+        res.sendFile(path.resolve('../client/build', 'index.html'));
     });
 }
 
