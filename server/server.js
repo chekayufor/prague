@@ -167,7 +167,7 @@ app.delete('/upload/:filename', async (req, res) => {
 //Serve static assets i production
 if(process.env.NODE_ENV ==='production') {
     //Set static folder
-    app.use(express.static('client/build'));
+    app.use(express.static('../client/build'));
 
     app.get('*', (req, res) => {
         console.log("Current directory:", __dirname); 
