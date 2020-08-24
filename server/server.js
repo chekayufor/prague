@@ -2,7 +2,7 @@ const express = require('express');
 require('dotenv').config();
 const moment = require('moment');
 const path=require('path');
-var multer = require('multer');;
+var multer = require('multer');
 // const gcsSharp = require('multer-sharp'); 
 
 // resizer
@@ -25,7 +25,7 @@ app.use(express.static('public'));
 connectDB();
 
 //Init Middleware && now we can accept data 
-app.use(express.json({ extended: false }))
+app.use(express.json({ extended: false }));
 
 // app.get('/', (rec, res) => res.json({ msg: 'Welcome to Prague' }));
 
@@ -53,7 +53,7 @@ app.post('/api/send', (req, res) => {
             <li>Date: ${moment(data).format("LL dddd")}</li>
             <li>Text: ${text}</li>
             </ul>
-        `
+        `;
     // create reusable transporter object using the default SMTP transport
     let transporter = nodemailer.createTransport({
         host: 'gmail',
@@ -89,16 +89,16 @@ app.post('/api/send', (req, res) => {
 
     });
     console.log('DATA', req.body);
-    res.json({ message: 'Message received!' })
+    res.json({ message: 'Message received!' });
 });
 
 //uploading pictures
 var storage = multer.diskStorage({
     destination: function (req, file, cb) {
-        cb(null, uploadPath)
+        cb(null, uploadPath);
     },
     filename: function (req, file, cb) {
-        cb(null, Date.now() + '-' + file.originalname)
+        cb(null, Date.now() + '-' + file.originalname);
     }
 });
 //resize with multer-sharp
@@ -127,12 +127,12 @@ app.post('/upload', async (req, res) => {
         await upload(req, res, (err) => {
             console.log('upload______________req.file', req.file);
             if (err instanceof multer.MulterError) {
-                return res.status(500).json(err)
+                return res.status(500).json(err);
             } else if (err) {
-                return res.status(500).json(err)
+                return res.status(500).json(err);
             }
-            return res.status(200).send(req.file)
-        })
+            return res.status(200).send(req.file);
+        });
     } catch (err) {
         console.error(err.message);
         res.status(500).send('Server Error');
@@ -164,13 +164,14 @@ app.delete('/upload/:filename', async (req, res) => {
     }
 });
 
-//Serve static assets i poroduction
+//Serve static assets i production
 if(process.env.NODE_ENV ==='production') {
     //Set static folder
     app.use(express.static('client/build'));
 
     app.get('*', (req, res) => {
-        res.sendFile(path.resolve('../client','build', 'index.html'))
+        console.log("Current directory:", __dirname); 
+        res.sendFile(path.resolve('../client','build', 'index.html'));
     });
 }
 
