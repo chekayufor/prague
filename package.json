@@ -2,7 +2,7 @@
     "scripts": 
     {
         "build": "npm run build:client && npm run build:server",
-        "build:server": "cd ../server && npm i",
+        "build:server": "cd server && npm i",
         "build:client": "cd client && npm i && npm run build",
         "start": "cd server && npm run start"
     }
