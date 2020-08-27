@@ -192,14 +192,11 @@ const Tour = (props) => {
         padding: 0 2rem 0 2rem;
         /* margin-top:0; */
         font-weight:bold;
-        @media (min-width: 600px) {
-            font-size:36px;
+        @media (min-width: 1024px) {
+            font-size:48px;
             padding:0 2rem 0 2rem;
             border-radius: 10px;
             filter: drop-shadow(1px 1px 1px black);
-        }
-        @media (min-width: 1024px) {
-            font-size:48px;
         }
         @media (min-width: 1480px) {
             font-size:62px;

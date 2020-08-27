@@ -24,7 +24,7 @@ const ToggleButton = styled.button`
     &&:focus{
         outline: none;
     }
-    @media(min-width: 560px) {
+    @media(min-width: 1024px) {
       /* height: 32px;
       width: 46px; */
       display:none;

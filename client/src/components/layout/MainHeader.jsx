@@ -31,6 +31,7 @@ const Banner = styled.div`
     flex-direction: column;
     align-items:center;
     justify-content:center;
+    margin-bottom:20px;
     @media (max-width: 321px) {
         height:400px;
     }
@@ -110,16 +111,13 @@ const H1=styled.h1`
     padding: 40% 2rem 0 2rem;
     margin-top:0;
     font-weight:bold;
-    @media (min-width: 600px) {
-        font-size:36px;
+    @media (min-width: 1024px) {
+        font-size:48px;
         padding:0 2rem 0 2rem;
         font-size:36px;
         border-radius: 10px;
         filter: drop-shadow(2px 4px 6px black);
 
-    }
-    @media (min-width: 1024px) {
-        font-size:48px;
     }
     @media (min-width: 1480px) {
         font-size:72px;

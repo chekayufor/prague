@@ -82,7 +82,7 @@ const Bar = styled.div`
     top:0;
     left:0;
     width:100%;
-    height:max-content;
+    height:50px;
     background-color:rgba(0,0,0,0.5);
     z-index:800;
     @media(min-width: 1024px) {

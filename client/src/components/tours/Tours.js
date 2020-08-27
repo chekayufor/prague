@@ -24,7 +24,9 @@ const Tours = (props) => {
                 (filtered !== null) ? (
                     filtered.map(({ _id, name, section, text, img, cost, start, duration, included, unincluded, necessary, location, language, type, date }) => (
                         <Li key={_id} style={{ padding: '0' }}>
-                            <H5 >{name}</H5>
+                            <Link to={`/tours/${_id}`}>
+                                <H3 >{name}</H3>
+                            </Link>
                             <ImageContainer>
                                 {(img && img.length) ? (
                                     <Img src={random(img).path.replace(/^\.\.\/client\/public/, '')} />
@@ -46,7 +48,9 @@ const Tours = (props) => {
                     ))) : (
                         props.tours && props.tours.sort(function(a, b){return 0.5 - Math.random()}).map(({ _id, name, section, text, img, cost, start, duration, included, unincluded, necessary, location, language, type, date }) => (
                             <Li key={_id} style={{ padding: '0' }} >
-                                <H5 >{name}</H5>
+                                <Link to={`/tours/${_id}`}>
+                                    <H3 >{name}</H3>
+                                </Link>
                                 <ImageContainer>
                                     {(img && img.length) ? (
                                         <Img src={random(img).path.replace(/^\.\.\/client\/public/, '')} />
@@ -96,21 +100,22 @@ const Div = styled.div`
         display:grid;
         padding: 20px 40px;
     `
-const H5 = styled.h5`
-        color:#919aaf;
-        font-size:1.3;
+const H3 = styled.h3`
+        color:#6e778c;
+        font-size:1.5rem;
         text-align:center;
         padding: 0 2rem;
         margin-bottom:1.5rem;
         font-weight:bold;
-        @media (min-width: 600px) {
-            font-size:36px;
+        cursor: pointer;
+        @media (min-width: 1024px) {
+            font-size:48px;
             font-size:2rem;
             border-radius: 10px;
             filter: drop-shadow(1px 1px 1px black);
         }
         @media (min-width: 1480px) {
-            font-size:2.4rem;
+            font-size:62px;
         }
     `
 const Text = styled.p`
@@ -135,7 +140,7 @@ const Span = styled.span`
 const ImageContainer = styled.div`
         height: 320px;
         width:80%;
-        cursor: pointer;
+        cursor:auto;
         border: double 3px white;
         -webkit-box-shadow: 0px 0px 20px -8px rgba(0,0,0,1);
         -moz-box-shadow: 0px 0px 20px -8px rgba(0,0,0,1);
@@ -152,5 +157,6 @@ const Img = styled.img`
         width:100%;
         height:100%;
         object-fit: cover;
+        cursor: auto;
     `
 export default Tours
