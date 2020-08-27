@@ -74,6 +74,7 @@ const SideDrawer = (props) => {
     z-index:1000;
     transform: translateX(${props => props.show? '0': '-100%' });
     transition: transform 0.3s ease-out;
+    overflow:scroll;
     h4{
       text-align:center;
       padding:0 0 1rem 0;
@@ -120,7 +121,7 @@ const SideDrawer = (props) => {
             color:#79d9fd;
         }
     }
-    @media(min-width: 1024px) {
+    @media(min-width: 1025px) {
       display:none;
     }
   `

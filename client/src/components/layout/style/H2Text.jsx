@@ -7,6 +7,7 @@ const H2=styled.h2`
     text-transform: uppercase;
     font-weight: 700;
     color:#455f8e;
+    filter: drop-shadow(black 1px 1px 1px);
     /* -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-position: center center;

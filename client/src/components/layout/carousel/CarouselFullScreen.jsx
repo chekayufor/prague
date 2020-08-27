@@ -11,7 +11,7 @@ const CarouselFullScreen = ({videos}) => {
   let slideWidth;
   if (window.matchMedia("(max-width: 600px)").matches) {
     /* The viewport is less than, or equal to, 600 pixels wide */
-     slideWidth = 24; 
+     slideWidth = 22; 
   } else {
     /* The viewport is greater than 700 pixels wide */
     slideWidth = 30; 
@@ -86,7 +86,7 @@ const Box = styled.div`
   }
 `;
 const Mask = styled.div`
-  width: 100%;
+  width: 22rem;
   height:100%;
   overflow: hidden;
   border: double 3px white;
@@ -95,6 +95,9 @@ const Mask = styled.div`
     box-shadow: 0px 0px 20px -8px rgba(0,0,0,1);
     overflow: hidden;
     padding: 2px;
+    @media (min-width: 600px) {
+      width: 100%;
+  }
 `;
 const SlideContainer = styled.div`
   width: 100%;
@@ -117,6 +120,9 @@ const Slide = styled.div`
 `;
 const Button = styled.button`
     height: 2.2rem;
-    width: 3rem;
+    width: 2.2rem;
     border-radius: 50%;
+    @media (min-width: 600px) {
+    width: 3rem;
+  }
 `

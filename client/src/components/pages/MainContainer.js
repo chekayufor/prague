@@ -41,35 +41,7 @@ const MainContainer = (props) => {
         setVideos(res.data.items);
         setSelectedVideo(res.data.items[0]);
       }
-      //youtube
-    //   const handleSubmit = async (searchTerm) => {
-    //     const response = await youtube.get('search', {  
-    //         params: {
-    //             part: 'snippet',
-    //             maxResults: 50,
-    //             // key: 'AIzaSyB2wT_CbrmLhTTb-Cn8dEBuH_xoOkjAABg',
-    //             list:'UUMmsWAmdBLUdAEHuDmypuRQ',
-    //             key: Key,
-    //             q:searchTerm,
-    //             order:'viewCount',
-    //             pageToken:'CAoQAA',
-    //             pageInfo: {
-    //                 totalResults: 50,
-    //                 resultsPerPage: 15
-    //               },
-    //             type:'video',
-    //         }
-    //     });
-        
-    //     console.log(response.data.items);
 
-    //     setVideos(response.data.items);
-    //     setSelectedVideo(response.data.items[0]);
-    // }
-    // const onVideoSelect = (video) => {
-    //     setSelectedVideo(video);
-    // }
-    // console.log({tours})
     const random=(list)=> {
         return list[Math.floor((Math.random()*list.length))];
     }
