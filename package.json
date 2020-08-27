@@ -5,5 +5,12 @@
         "build:server": "cd server && npm i",
         "build:client": "cd client && npm i && npm run build",
         "start": "cd server && npm run start"
-    }
+    },
+     "name": "inprague",
+    "description": "a really cool app",
+    "version": "1.0.0",
+    "engines":
+        {
+            "node": "12.x"
+        }
 }
