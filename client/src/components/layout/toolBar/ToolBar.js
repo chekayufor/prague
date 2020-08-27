@@ -147,7 +147,7 @@ const Spacer = styled.div`
     flex:1;
 `
 const Weather=styled.div`
-    /* display:flex; */
+    display:none;
     padding-left: 10px;
     @media (min-width: 1024px) {
       display:none;
