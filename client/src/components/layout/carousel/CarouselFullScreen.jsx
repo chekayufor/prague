@@ -40,9 +40,9 @@ const CarouselFullScreen = ({videos}) => {
     </a>
     <Box>
     {(index <=0)? 
-      <Button style={{marginRight: '3px'}}>&laquo</Button>
+      <Button style={{marginRight: '3px'}}>&laquo;</Button>
       :
-      <Button onClick={moveLeft} style={{marginRight: '3px'}}>&laquo</Button>
+      <Button onClick={moveLeft} style={{marginRight: '3px'}}>&laquo;</Button>
     }
       <Mask >
         <SlideContainer
