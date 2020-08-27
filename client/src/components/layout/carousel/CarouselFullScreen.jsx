@@ -40,9 +40,9 @@ const CarouselFullScreen = ({videos}) => {
     </a>
     <Box>
     {(index <=0)? 
-      <Button style={{marginRight: '3px'}}>Prev</Button>
+      <Button style={{marginRight: '3px'}}><<</Button>
       :
-      <Button onClick={moveLeft} style={{marginRight: '3px'}}>Prev</Button>
+      <Button onClick={moveLeft} style={{marginRight: '3px'}}><<</Button>
     }
       <Mask >
         <SlideContainer
@@ -58,9 +58,9 @@ const CarouselFullScreen = ({videos}) => {
         </SlideContainer>
         </Mask>
        {(index >= 14)?
-        <Button style={{marginLeft: '3px'}}>Next</Button>
+        <Button style={{marginLeft: '3px'}}>>></Button>
         :
-        <Button onClick={moveRight} style={{marginLeft: '3px'}}>Next</Button>
+        <Button onClick={moveRight} style={{marginLeft: '3px'}}>>></Button>
       }
     </Box>
     </Fragment>):(<Fragment/>)

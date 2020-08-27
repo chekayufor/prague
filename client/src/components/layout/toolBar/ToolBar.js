@@ -139,7 +139,7 @@ const BarItems = styled.div`
             font-size:22px;
         }
     }
-    @media(max-width: 1024px) {
+    @media(max-width: 1023px) {
     display:none;
   }
 `
