@@ -121,11 +121,8 @@ const H1=styled.h1`
     }
     @media (min-width: 1480px) {
         font-size:72px;
+        margin-top:100px;
     }
-/*     
-    @media (min-width: 1800px)and(min-height:1020px) {
-        /* padding:0 2rem 0 2rem; */
-    } */
 `
 const Text=styled.p`
     pointer-events: none;
@@ -140,9 +137,6 @@ const Text=styled.p`
     @media (max-width: 321px) {
         padding:1rem 2rem 0 2rem;
     }
-    /* @media (min-width: 600px) {
-        font-size:24px;
-    } */
     @media (min-width: 600px) {
         height: auto;
         font-size:22px;
@@ -155,7 +149,7 @@ const Text=styled.p`
         font-size:26px;
     }
     @media (min-width: 1480px) {
-        font-size:32px;
+        font-size:48px;
     }
 `
 
