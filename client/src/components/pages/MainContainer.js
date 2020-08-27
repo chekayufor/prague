@@ -153,6 +153,11 @@ const ContentContainer=styled.div`
         padding: 20px;
         margin: 0 auto;
     }
+    @media (min-width: 1780px) {
+        grid-template-rows: 1fr 1fr;
+        grid-template-columns: 1fr 1fr;
+        width: max-content;
+    }
    
 `
 const Section = styled.div`
