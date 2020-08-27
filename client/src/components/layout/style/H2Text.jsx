@@ -6,6 +6,7 @@ const H2=styled.h2`
     margin: 0;
     text-transform: uppercase;
     font-weight: 700;
+    color:#455f8e;
     /* -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-position: center center;
