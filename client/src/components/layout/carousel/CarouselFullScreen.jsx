@@ -122,7 +122,20 @@ const Button = styled.button`
     height: 2.2rem;
     width: 2.2rem;
     border-radius: 50%;
+    margin-left: 3px;
+    display: flex;
+    justify-content: center;
+    font-size: 30px;
+    align-items: center;
+    text-align: center;
+    padding-bottom: 8%;
+    color: #455f8e;
     @media (min-width: 600px) {
-    width: 3rem;
-  }
+      width: 3rem;
+    }
+    @media (min-width: 1480px) {
+      width: 5rem;
+      height: 3rem;
+      font-size: 40px;
+    }
 `
