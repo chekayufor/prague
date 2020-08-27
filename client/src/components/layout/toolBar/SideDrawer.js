@@ -79,7 +79,7 @@ const SideDrawer = (props) => {
       padding:0 0 1rem 0;
       font-size:22px;
       color:#0f1c63;
-      @media(min-width: 600px) {
+      @media(min-width: 1024px) {
         font-size:28px;
         padding:2rem 0 1rem 0;
       }
@@ -120,7 +120,7 @@ const SideDrawer = (props) => {
             color:#79d9fd;
         }
     }
-    @media(min-width: 600px) {
+    @media(min-width: 1024px) {
       display:none;
     }
   `
@@ -131,7 +131,7 @@ const SideDrawer = (props) => {
     background-position: center;
     background-repeat: no-repeat; 
     background-size: contain; 
-    @media(min-width: 600px) {
+    @media(min-width: 1024px) {
       height: 200px; 
     }
   `

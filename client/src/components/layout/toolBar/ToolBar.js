@@ -82,11 +82,11 @@ const Bar = styled.div`
     top:0;
     left:0;
     width:100%;
-    height:100px;
+    height:max-content;
     background-color:rgba(0,0,0,0.5);
     z-index:800;
     @media(min-width: 1024px) {
-        height:max-content;
+        height:100px;
   }
 `
 
@@ -105,7 +105,7 @@ const BarLogo = styled.div`
     font-family:American Typewriter, serif;
      font-size:1.2rem;
  }
- @media(min-width: 600px) {
+ @media(min-width: 1024px) {
     margin-left:0;
     font-size:24px;
   }
@@ -132,14 +132,14 @@ const BarItems = styled.div`
         &:hover, &:active {
             color:#79d9fd;
         }
-        @media(min-width: 600px) {
+        @media(min-width: 1024px) {
             font-size:18px;
         }
         @media (min-width: 1480px) {
             font-size:22px;
         }
     }
-    @media(max-width: 600px) {
+    @media(max-width: 1024px) {
     display:none;
   }
 `
@@ -159,7 +159,7 @@ const WeatherImg=styled.img`
       border-style: double;
 `
 const Div = styled.div`
-@media(min-width: 600px) {
+@media(min-width: 1024px) {
    display:none;
   }
 `
