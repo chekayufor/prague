@@ -60,7 +60,9 @@ const MainContainer = (props) => {
                                 {filtered.map(({_id, name, section,text, img, cost,start,duration,included,unincluded,necessary,location,language,type,date}) =>(
                                     <CSSTransition>
                                     <Li key={_id}>
-                                        <H3>{name}</H3>
+                                        <Link  to={`/tours/${_id}`}>
+                                         <H3>{name}</H3>
+                                        </Link>
                                         <ImageContainerFilter>
                                         {(img && img.length)?(
                                             <Img src={random(img).path.replace(/^\.\.\/client\/public/, '')}/>
@@ -230,25 +232,22 @@ const ImageContainer=styled.div`
         }
     `
     const H3=styled.h3`
-       color:#919aaf;
-        font-size:1.3;
-        text-align:center;
-        margin: 150px 40px 20px 40px;
-        padding: 0 2rem;
-        margin-bottom:1.5rem;
-        font-weight:bold;
-        @media (min-width: 600px) {
-            font-size:36px;
-            font-size:2rem;
-            border-radius: 10px;
-            filter: drop-shadow(1px 1px 1px black);
-        }
-        /* @media (min-width: 1024px) {
-            font-size:48px;
-        } */
-        @media (min-width: 1480px) {
-            font-size:2.4rem;
-        }
+    color:#6e778c;
+    font-size: 1.5rem;
+    text-align:center;
+    margin: 150px 40px 20px 40px;
+    padding: 0 2rem 0 2rem;
+    /* margin-top:0; */
+    font-weight:bold;
+    @media (min-width: 1024px) {
+        font-size:48px;
+        padding:0 2rem 0 2rem;
+        border-radius: 10px;
+        filter: drop-shadow(1px 1px 1px black);
+    }
+    @media (min-width: 1480px) {
+        font-size:62px;
+    }
     `
     const Text=styled.p`
         font-family: Courier New, monospace;
