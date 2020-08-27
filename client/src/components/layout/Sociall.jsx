@@ -12,7 +12,7 @@ const Sociall = () => {
                 <li><a href="https://vk.com/id469089698" target="_blank" rel="noopener noreferrer"><img alt='vk' src='/images/icons/icons8-vk-circled-50.png'/></a></li>
                 <li><a href="mailto:dmitriy.prague@gmail.com?subject= Запрос с сайта о путешествиях по Праге&amp;body= Будем рады ответить на любой Ваш вопрос 🙂&amp" target="_blank" rel="noopener noreferrer"><img alt='send' src='/images/icons/icons8-send-50.png'/></a></li>
                 <li><a href="https://api.whatsapp.com/send?phone=420777892007" target="_blank" rel="noopener noreferrer"><img alt='whatsapp' src='/images/icons/icons8-whatsapp-50.png'/></a></li>
-                <li><a href="https://telegram.me/@guide_praha_dmitry" target="_blank" rel="noopener noreferrer"><img alt='telegram' src='/images/icons/icons8-telegram-app-48.png'/></a></li>
+                <li><a href="https://msng.link/o/?@guide_praha_dmitry=tg" target="_blank" rel="noopener noreferrer"><img alt='telegram' src='/images/icons/icons8-telegram-app-48.png'/></a></li>
             </ul>
         </SociallContainer>
     )
