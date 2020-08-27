@@ -91,7 +91,7 @@ const Header = styled.div`
 `
 const Weather=styled.div`
         display:none;
-    @media (min-width: 600px) {
+    @media (min-width: 1024px) {
         display:flex;
          margin-top: 120px;
          padding-left: 10px;

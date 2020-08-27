@@ -85,7 +85,8 @@ const Bar = styled.div`
     height:100px;
     background-color:rgba(0,0,0,0.5);
     z-index:800;
-    @media(min-width: 600px) {
+    @media(min-width: 1024px) {
+        height:max-content;
   }
 `
 
@@ -148,7 +149,7 @@ const Spacer = styled.div`
 const Weather=styled.div`
     /* display:flex; */
     padding-left: 10px;
-    @media (min-width: 600px) {
+    @media (min-width: 1024px) {
       display:none;
     }
 `

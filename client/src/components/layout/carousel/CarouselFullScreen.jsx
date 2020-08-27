@@ -105,9 +105,8 @@ const SlideContainer = styled.div`
    transform: translateX(${({ x }) => -(x)}rem);
 `;
 const Slide = styled.div`
-  width: 24rem;
+  width: 22rem;
   height: 100%;
-  /* min-height: 300px; */
   display: flex;
   justify-content: space-between;
   transition: transform 3s linear;
