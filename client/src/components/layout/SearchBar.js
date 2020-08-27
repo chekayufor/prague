@@ -19,7 +19,6 @@ const SearchBar = () => {
     e.preventDefault();
     if (text.current.value !== '') {
       filterTours(e.target.value);
-      text.current.value = '';
     } else {
       clearFilter();
     }
