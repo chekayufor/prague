@@ -185,18 +185,17 @@ const Tour = (props) => {
         }
     `
     const H3=styled.h3`
-        color:#6e778c;
-        font-size: 1.5rem;
+        font-size: 24px;
+        text-transform: uppercase;
+        font-weight: 700;
+        color:#455f8e;
+        filter: drop-shadow(black 1px 1px 1px);
         text-align:center;
         margin: 150px 40px 20px 40px;
         padding: 0 2rem 0 2rem;
         /* margin-top:0; */
-        font-weight:bold;
         @media (min-width: 1024px) {
             font-size:48px;
-            padding:0 2rem 0 2rem;
-            border-radius: 10px;
-            filter: drop-shadow(1px 1px 1px black);
         }
         @media (min-width: 1480px) {
             font-size:62px;
