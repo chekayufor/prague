@@ -25,9 +25,11 @@ const Banner = styled.div`
     top:0;
     left:0;
     width:100%;
-    height:fit-content;
-    background-color: #ffffff;
     display: flex;
+    display: -webkit-flex;
+    height:fit-content;
+    height:-webkit-fit-content;
+    background-color: #ffffff;
     flex-direction: column;
     align-items:center;
     justify-content:center;
@@ -55,8 +57,10 @@ const Parallax = styled.div`
     background-position:  inherit;
     background-repeat: no-repeat; 
     background-size: contain; 
+    -webkit-background-size: contain;
     @media (min-width: 600px) {
-        background-size: cover; 
+        background-size: cover;
+        -webkit-background-size :cover;
         background-image: url('images/banner.jpeg');
 
     }
@@ -64,6 +68,7 @@ const Parallax = styled.div`
 const Header = styled.div`
     pointer-events: none;
     display:flex;
+    display:-webkit-flex;
     /* height: 54%; */
     width:100%;
     flex-direction:column;
@@ -108,7 +113,7 @@ const H1=styled.h1`
     color:#ffffff;
     font-size:24px;
     text-align:center;
-    padding: 40% 2rem 0 2rem;
+    padding: 200px 2rem 0 2rem;
     margin-top:0;
     font-weight:bold;
     @media (min-width: 1024px) {
@@ -131,6 +136,7 @@ const Text=styled.p`
     /* height: 50%; */
     margin:0;
     text-align:center;
+    text-align: -webkit-center;
     padding:1rem 2rem 1rem 2rem;
     background: rgba(250, 250, 250, 0.7);
     width: fit-content; 

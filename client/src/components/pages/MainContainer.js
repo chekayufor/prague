@@ -132,7 +132,7 @@ const Container = styled.div`
     min-height:100vh;
     overflow: hidden;
     background-color: #ffffff;
-    display:grid;
+    display:-webkit-grid;
     @media (max-width: 769px) {
         min-width: 100%;
     }
@@ -168,7 +168,8 @@ const Section = styled.div`
     justify-items:center;
     grid-template-rows: 1fr 3fr;
     grid-template-columns: 100%;
-    margin-bottom:20px;
+    padding-bottom:20px;
+    background-color: white;
 `
 const ImageContainer=styled.div`
     /* width: 280px; */

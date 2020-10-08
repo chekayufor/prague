@@ -12,10 +12,10 @@ const YouTubeVideo = ({video}) => {
 
 const Iframe = styled.iframe`
     /* height:260px; */
-    height:210px;
+    height:220px;
     width:22rem;
     @media (min-width: 600px) {
-        height:350px;
+        height:355px;
         width:30rem;
   }
     

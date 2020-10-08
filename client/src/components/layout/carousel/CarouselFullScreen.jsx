@@ -76,9 +76,11 @@ const Box = styled.div`
   width: 100%;
   height: 260px;
   display: grid;
+  display: -webkit-grid;
   grid-template-columns: 1fr 10fr 1fr; 
   justify-items: center;
   align-items: center;
+  -webkit-align-items:center;
   position: relative;
   padding: 20px 5px;
   @media (min-width: 600px) {
@@ -86,7 +88,7 @@ const Box = styled.div`
   }
 `;
 const Mask = styled.div`
-  width: 22rem;
+  max-width: 22rem;
   height:100%;
   overflow: hidden;
   border: double 3px white;
@@ -96,7 +98,7 @@ const Mask = styled.div`
     overflow: hidden;
     padding: 2px;
     @media (min-width: 600px) {
-      width: 100%;
+      max-width: calc(100% - 30px);
   }
 `;
 const SlideContainer = styled.div`
@@ -105,7 +107,10 @@ const SlideContainer = styled.div`
   display: flex;
   justify-content: space-between;
   transition: transform 3s linear;
-   transform: translateX(${({ x }) => -(x)}rem);
+  -webkit-transition: transform 3s linear;
+  transform: translateX(${({ x }) => -(x)}rem);
+  -webkit-transform: translateX(${({ x }) => -(x)}rem);
+
 `;
 const Slide = styled.div`
   width: 22rem;
@@ -113,7 +118,9 @@ const Slide = styled.div`
   display: flex;
   justify-content: space-between;
   transition: transform 3s linear;
+  -webkit-transition: transform 3s linear;
   transform: translateX(${({ x }) => -(x)}rem);
+  -webkit-transform: translateX(${({ x }) => -(x)}rem);
   @media (min-width: 600px) {
     width: 30rem;
   }
@@ -124,9 +131,11 @@ const Button = styled.button`
     border-radius: 50%;
     margin-left: 3px;
     display: flex;
+    display:-webkit-flex;
     justify-content: center;
     font-size: 30px;
     align-items: center;
+    -webkit-align-items: center;
     text-align: center;
     padding-bottom: 8%;
     color: #455f8e;

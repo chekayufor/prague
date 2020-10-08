@@ -55,7 +55,8 @@ const ImgContainer= styled.div`
     width:100%;
     background-position: center;
     background-repeat: no-repeat; 
-    background-size: cover; 
+    background-size: cover;
+    -webkit-background-size:contain; 
     @media(min-width: 600px) {
         height: 360px;
         width: 480px;

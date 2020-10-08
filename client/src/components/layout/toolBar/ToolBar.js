@@ -98,6 +98,7 @@ const BarNavigation = styled.div`
 `
 const BarLogo = styled.div`
     margin-left: 3rem;
+    z-index:80;
 
  a {
     color:rgba(0,0,0,1);
@@ -159,6 +160,7 @@ const WeatherImg=styled.img`
       border-style: double;
 `
 const Div = styled.div`
+z-index:80;
 @media(min-width: 1024px) {
    display:none;
   }

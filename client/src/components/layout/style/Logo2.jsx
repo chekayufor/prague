@@ -16,6 +16,7 @@ const Logo2 = () => {
 }
 const NeonWrapper = styled.div`
     height: 24px;
+    width:200px;
     text-align: center;
     padding-left: 0.6rem; 
     display:flex;
@@ -50,10 +51,10 @@ const Txt = styled.span`
 `
 const Gradient = styled.span`
     background: linear-gradient(114.5793141156962deg, rgba(6, 227, 250,1) 4.927083333333334%,rgba(229, 151, 64,1) 97.84374999999999%);
-    position: absolute;
     top: 0;
-    left:0;
-    width: 100%;
+    /* left:0; */
+    position: absolute;
+    width: 200px;
     height:100%;
     mix-blend-mode:multiply;
 `
@@ -71,6 +72,8 @@ const Dodge = styled.span`
     bottom:0;
     mix-blend-mode: color-dodge;
     animation: ${DodgeArea} 3s linear infinite;
+    -webkit-animation:${DodgeArea} 3s linear infinite;
+    position:-webkit-sticky;
 `
 
 
