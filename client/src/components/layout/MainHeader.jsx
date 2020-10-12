@@ -155,7 +155,7 @@ const Text=styled.p`
         font-size:26px;
     }
     @media (min-width: 1480px) {
-        font-size:48px;
+        font-size:36px;
     }
 `
 
