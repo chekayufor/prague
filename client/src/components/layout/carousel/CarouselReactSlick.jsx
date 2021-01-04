@@ -52,17 +52,22 @@ const SlideContainer = styled.div`
 const Slide = styled.div`
   /* width: 30rem; */
   height: 100%;
-  min-height: 300px;
+  min-height: 265px;
   display: flex;
   justify-content: space-between;
     border: double 3px white;
+    @media(min-width: 1024px) {
+        min-height: 300px;    }
 `;
 const Image = styled.img`
   width: 100%;
-  height:378px;
+  height:260px;
   margin:auto;
   object-fit: cover;
   object-position: center;
+  @media(min-width: 1024px) {
+        height:378px;
+    }
 `;
 const A = styled.a`
   cursor: pointer;

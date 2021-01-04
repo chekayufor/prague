@@ -22,12 +22,13 @@ const GuestGallery = () => {
 
 const Container = styled.div`
     max-width:100%;
-    height:384px;
+    height:264px;
     align-items:center;
     left:0;
     right:0;
    
     @media(min-width: 1024px) {
+        height:384px;
         min-width:980px;
     }
 `

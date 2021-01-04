@@ -36,9 +36,11 @@ const Banner = styled.div`
     margin-bottom:20px;
     @media (max-width: 321px) {
         height:400px;
+        background:#c0d5ea;
     }
     @media (max-width: 420px) {
-        height:440px;
+        background:#c0d5ea;
+        height:470px;
     }
     @media (min-width: 1024px) {
         height: 1000px;
@@ -51,7 +53,7 @@ const Banner = styled.div`
 const Parallax = styled.div`
     background-image: url('images/banner-s640.jpg');
     position: static;
-    height: 100%;
+    height: auto;
     width:100%;
     background-attachment: fixed;
     background-position:  inherit;
@@ -138,7 +140,8 @@ const Text=styled.p`
     text-align:center;
     text-align: -webkit-center;
     padding:1rem 2rem 1rem 2rem;
-    background: rgba(250, 250, 250, 0.7);
+    /* background: rgba(250, 250, 250, 0.7); */
+    background:#c0d5ea;
     width: fit-content; 
     @media (max-width: 321px) {
         padding:1rem 2rem 0 2rem;
