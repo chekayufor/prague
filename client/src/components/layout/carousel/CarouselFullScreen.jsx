@@ -126,9 +126,10 @@ const Slide = styled.div`
   }
 `;
 const Button = styled.button`
-    /* height: 2.2rem;
-    width: 2.2rem; */
-    /* border-radius: 50%; */
+    z-index:100;
+    height: 2.2rem;
+    width: 2.2rem; 
+    border-radius: 50%;
     border: none;
     background: none;
     margin-left: 3px;
@@ -141,13 +142,17 @@ const Button = styled.button`
     text-align: center;
     padding-bottom: 8%;
     color: #455f8e;
+    &&::focus{
+      background-color:none;
+      background:none;
+    }
     @media (min-width: 600px) {
-      /* width: 3rem; */
+      width: 3rem;
       font-size: 50px;
     }
     @media (min-width: 1480px) {
-      /* width: 5rem;
-      height: 3rem; */
+      width: 5rem;
+      height: 3rem;
       font-size: 60px;
     }
     @media (min-width: 2400px) {
