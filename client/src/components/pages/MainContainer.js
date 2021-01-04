@@ -131,7 +131,7 @@ const Container = styled.div`
     justify-content: center;
     min-height:100vh;
     overflow: hidden;
-    background-color: #ffffff;
+    background-color: white;
     display:-webkit-grid;
     @media (max-width: 769px) {
         min-width: 100%;

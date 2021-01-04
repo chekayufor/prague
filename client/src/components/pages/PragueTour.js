@@ -53,7 +53,7 @@ const Container = styled.div`
     text-align:center;
     min-height:100vh;
     overflow: hidden;
-    background-color: #ffffff;
+    background-color: white;
     display:grid;
     align-content: baseline;
     justify-content: center;

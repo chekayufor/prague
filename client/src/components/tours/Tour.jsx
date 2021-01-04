@@ -175,7 +175,7 @@ const Tour = (props) => {
         /* min-width: 980px; */
         min-height:100vh;
         overflow: hidden;
-        background-color: #ffffff;
+        background-color: white;
         display:grid;
         align-content: center;
         justify-content: center;

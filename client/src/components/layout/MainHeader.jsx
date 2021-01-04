@@ -29,17 +29,17 @@ const Banner = styled.div`
     display: -webkit-flex;
     height:fit-content;
     height:-webkit-fit-content;
-    background-color: #ffffff;
+    background-color: white;
     flex-direction: column;
     align-items:center;
     justify-content:center;
     margin-bottom:20px;
     @media (max-width: 321px) {
         height:400px;
-        background:#c0d5ea;
+        /* background:#c0d5ea; */
     }
     @media (max-width: 420px) {
-        background:#c0d5ea;
+        /* background:#c0d5ea; */
         height:470px;
     }
     @media (min-width: 1024px) {
@@ -137,11 +137,12 @@ const Text=styled.p`
     width:100%;
     /* height: 50%; */
     margin:0;
+    color:rgb(69, 95, 142);
     text-align:center;
     text-align: -webkit-center;
     padding:1rem 2rem 1rem 2rem;
     /* background: rgba(250, 250, 250, 0.7); */
-    background:#c0d5ea;
+    /* background:#c0d5ea; */
     width: fit-content; 
     @media (max-width: 321px) {
         padding:1rem 2rem 0 2rem;
