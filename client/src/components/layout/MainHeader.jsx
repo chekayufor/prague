@@ -138,6 +138,7 @@ const Text=styled.p`
     /* height: 50%; */
     margin:0;
     color:rgb(69, 95, 142);
+    background-color: white;
     text-align:center;
     text-align: -webkit-center;
     padding:1rem 2rem 1rem 2rem;
