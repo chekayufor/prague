@@ -12,9 +12,17 @@ const connectDB = async () => {
     });
 
     console.log("MongoDB Connected...");
+
+    // Check for required data
+    const collection = mongoose.connection.db.collection("mycollection");
+    const count = await collection.countDocuments({});
+    if (count === 0) {
+      console.warn("Warning: no data in MongoDB");
+    } else {
+      console.log("Data found in MongoDB");
+    }
   } catch (err) {
-    // console.error(err.message);
-    console.error("no data in MongoDB");
+    console.error("MongoDB connection error:", err.message);
     process.exit(1);
   }
 };
