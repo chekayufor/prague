@@ -19,7 +19,7 @@ const app = express();
 //CORS middleware.
 app.use(cors());
 //static folder
-app.use(express.static("public"));
+app.use(express.static(path.join(__dirname, "../client/public")));
 
 //connect DB
 connectDB();
